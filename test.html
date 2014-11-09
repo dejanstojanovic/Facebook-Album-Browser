@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="src/jquery.fb.albumbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="src/jquery.fb.albumbrowser.css" />
+</head>
+
+<body>
+    <div class="fb-album-container">
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fb-album-container").FacebookAlbumBrowser({
+                account: "natgeo"//,
+                //skipAlbums: ["Cover Photos"]
+            });
+
+        });
+    </script>
+</body>
+</html>
