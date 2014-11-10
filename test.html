@@ -8,15 +8,20 @@
 </head>
 
 <body>
+    <div class="fb-preview-overlay">
+
+
+    </div>
     <div class="fb-album-container">
-        <div class="fb-loading"></div>
+        <!--<div class="fb-loading"></div>-->
     </div>
 
     <script type="text/javascript">
         $(document).ready(function () {
             $(".fb-album-container").FacebookAlbumBrowser({
-                account: "natgeo"//,
-                //skipAlbums: ["Cover Photos"]
+                account: "natgeo",
+                skipAlbums: ["Profile Pictures"],
+                showAccountInfo: true
             });
 
         });

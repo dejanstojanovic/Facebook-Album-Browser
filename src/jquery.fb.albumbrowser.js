@@ -1,6 +1,7 @@
 ﻿$.fn.FacebookAlbumBrowser = function (options) {
     var defaults = {
         account: "",
+        showAccountInfo:true,
         skipEmptyAlbums: true,
         skipAlbums: []
     }
@@ -8,9 +9,15 @@
     var selector = $(this);
     selector.each(function (index) {
         var container = selector.get(index);
+
+        if (settings.showAccountInfo) {
+            addAccountInfo(container);
+        }
+
         $(container).append($('<ul>', {
             class: "fb-albums"
         }));
+
         var albumList = $(container).find(".fb-albums");
         loadAlbums("http://graph.facebook.com/" + settings.account + "/albums");
         function loadAlbums(url) {
@@ -53,7 +60,6 @@
                                             }
                                         }
 
-                                        //$("<img>", { "data-id": $(cover).get(0).id, class: "fb-album-thumb", src: albumImg.source }).insertBefore(listItem.find(".fb-album-title"));
                                         listItem.append($("<img>", { style: "margin-left:" + (prefWidth - albumImg.width) / 2 + "px;", "data-id": $(cover).get(0).id, class: "fb-album-thumb", src: albumImg.source }));
                                         listItem.find("img").load(function () {
                                             $(this).fadeIn(300);
@@ -75,18 +81,24 @@
                                 var self = $(this);
                                 $(selector).append($("<div>", { class: "fb-album-preview" }));
                                 var previewContainer = selector.find(".fb-album-preview");
-                                previewContainer.append($("<button>", { type: "button", text: "back to albums", class: "fb-albums-list" }));
-                                previewContainer.append($("<h3>", { text: $(self).find(".fb-album-title").text() }));
+                                previewContainer.append($("<button>", { type: "button", text: "<", class: "fb-albums-list" }));
+                                previewContainer.append($("<h3>", { class: "fb-album-heading", text: $(self).find(".fb-album-title").text() }));
                                 previewContainer.find("button.fb-albums-list").click(function () {
-                                    previewContainer.slideUp(function () {
-                                        $(selector).find(".fb-albums").slideDown();
+                                    previewContainer.fadeOut(function () {
+                                        $(selector).find(".fb-albums").fadeIn();
                                         previewContainer.remove();
                                     });
                                 });
                                 $(previewContainer).append($("<ul>", { class: "fb-photos" }));
                                 photosContainer = $(previewContainer).find("ul.fb-photos");
-                                    loadPhotos("https://graph.facebook.com/" + $(self).attr("data-id") + "/photos", photosContainer);
-                                
+                                loadPhotos("https://graph.facebook.com/" + $(self).attr("data-id") + "/photos", photosContainer);
+
+                                $(selector).find("ul.fb-albums").fadeOut(function () {
+                                    previewContainer.fadeIn();
+                                });
+
+
+
                             });
                             $(albumListItem).hover(function () {
                                 var self = $(this);
@@ -102,7 +114,6 @@
         }
 
         function loadPhotos(url, container) {
-            
             $.ajax({
                 type: 'GET',
                 url: url,
@@ -112,7 +123,6 @@
 
                     for (a = 0; a < result.data.length; a++) {
                         var photoListItem = $("<li>", { class: "fb-photo" });
-
                         var prefWidth = photoListItem.width();
                         var prefHeight = photoListItem.height();
                         var albumImg = $(result.data)[a].images[0];
@@ -124,25 +134,39 @@
                                 albumImg = $(result.data)[a].images[i];
                             }
                         }
-
-                        photoListItem.append($("<img>", { style: "margin-left:" + (prefWidth - albumImg.width) / 2 + "px;", "data-id": $(result.data).get(0).id, class: "fb-photo-thumb", src: albumImg.source }));
+                        var photoLink = $("<a>", { class: "fb-photo-thumb-link", href: $(result.data)[a].source });
+                        photoLink.append($("<img>", { style: "margin-left:" + (prefWidth - albumImg.width) / 2 + "px;", "data-id": $(result.data).get(0).id, class: "fb-photo-thumb", src: albumImg.source }));
+                        photoListItem.append(photoLink);
                         container.append(photoListItem);
                     }
 
                     if (result.paging && result.paging.next && result.paging.next != "") {
                         loadPhotos(result.paging.next, container);
                     }
-                    else {
-                        $(selector).find("ul.fb-albums").slideUp(function () {
-                            var previewContainer = $(selector).find(".fb-album-preview");
-                            //$(selector).append($("<div>", { class: "fb-album-preview" }));
-                            //previewContainer.append(container);
-                            previewContainer.slideDown();
-                        });
-                        
-                    }
                 }
             });
+        }
+
+        function addAccountInfo(container) {
+            var accountInfoContainer = $("<div>", { class: "fb-account-info" });
+            accountInfoContainer.append($("<img>", { src: "https://graph.facebook.com/" + settings.account + "/picture?type=square" }));
+            accountInfoContainer.append($("<h3>", {class:"fb-account-heading"}));
+            $(container).append(accountInfoContainer);
+            $.ajax({
+                type: 'GET',
+                url: "https://graph.facebook.com/"+settings.account,
+                cache: false,
+                dataType: 'jsonp',
+                success: function (result) {
+                    $(container).find(".fb-account-info").find(".fb-account-heading").text(result.name);
+                }
+            });
+        }
+
+
+        function initLightboxes() {
+
+            return false;
         }
 
         function getParameterByName(name, url) {
