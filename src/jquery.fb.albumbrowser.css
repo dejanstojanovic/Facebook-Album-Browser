@@ -53,8 +53,8 @@ li.fb-album, li.fb-photo
 
 div.fb-album-title
 {
-    color: rgba(59,89,152,1);
-    background-color: #f7f7f7;
+    color: #fff;
+    background-color: rgba(59,89,152,1);
     position: relative;
     padding: 5px;
     display: none;

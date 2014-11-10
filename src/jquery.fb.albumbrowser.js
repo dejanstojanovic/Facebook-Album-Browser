@@ -1,7 +1,8 @@
 ﻿$.fn.FacebookAlbumBrowser = function (options) {
     var defaults = {
         account: "",
-        showAccountInfo:true,
+        showAccountInfo: true,
+        showImageCount:true,
         skipEmptyAlbums: true,
         skipAlbums: []
     }
@@ -66,11 +67,11 @@
                             });
 
                             albumListItem.append($("<div>", { class: "fb-album-title", text: $(result.data).get(a).name }));
-                            albumListItem.append($("<div>", { class: "fb-album-count", text: $(result.data).get(a).count }));
-
+                            if (settings.showImageCount) {
+                                albumListItem.append($("<div>", { class: "fb-album-count", text: $(result.data).get(a).count }));
+                            }
                             $(albumList).append(albumListItem);
 
-                            //attach handlers
                             $(albumListItem).click(function () {
                                 var self = $(this);
                                 $(selector).append($("<div>", { class: "fb-album-preview" }));
