@@ -9,15 +9,12 @@
     var selector = $(this);
     selector.each(function (index) {
         var container = selector.get(index);
-
         if (settings.showAccountInfo) {
             addAccountInfo(container);
         }
-
         $(container).append($('<ul>', {
             class: "fb-albums"
         }));
-
         var albumList = $(container).find(".fb-albums");
         loadAlbums("http://graph.facebook.com/" + settings.account + "/albums");
         function loadAlbums(url) {
@@ -28,14 +25,11 @@
                 dataType: 'jsonp',
                 success: function (result) {
                     for (a = 0; a < $(result.data).length; a++) {
-
                         if (settings.skipAlbums.indexOf($(result.data).get(a).name) > -1 || settings.skipAlbums.indexOf($(result.data).get(a).id.toString()) > -1) {
                             continue;
                         }
                         var albumListItem = $("<li>", { class: "fb-album", "data-id": $(result.data).get(a).id });
-
                         if ($(result.data).get(a).count == null && settings.skipEmptyAlbums) {
-                            //console.log("REMOVE: " + $(result.data).get(a).id + " - " + $(result.data).get(a).name);
                             continue;
                         }
                         else {
@@ -96,9 +90,6 @@
                                 $(selector).find("ul.fb-albums").fadeOut(function () {
                                     previewContainer.fadeIn();
                                 });
-
-
-
                             });
                             $(albumListItem).hover(function () {
                                 var self = $(this);
@@ -143,6 +134,9 @@
                     if (result.paging && result.paging.next && result.paging.next != "") {
                         loadPhotos(result.paging.next, container);
                     }
+                    else {
+                        initLightboxes();
+                    }
                 }
             });
         }
@@ -165,8 +159,35 @@
 
 
         function initLightboxes() {
+            var overlay = $(".fb-preview-overlay");
+            if (overlay.length == 0) {
+                overlay = $("<div>", { class: "fb-preview-overlay" });
+                overlay.append($("<img>"));
+                $("body").append(overlay);
+                overlay = $(".fb-preview-overlay");
 
-            return false;
+                $(overlay).click(function () {
+                    $(this).fadeOut();
+                });
+            }
+            else {
+                overlay = $(".fb-preview-overlay");
+            }
+            $("a.fb-photo-thumb-link").unbind("click");
+            $("a.fb-photo-thumb-link").click( function (event) {
+                var overlay = $(".fb-preview-overlay");
+                var previewImage = overlay.find("img");
+                previewImage.hide();
+                previewImage.attr("src", $(this).attr("href"));
+                previewImage.load(function () {
+                    $(this).attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
+                    $(this).fadeIn();
+                });
+                overlay.fadeIn();
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            });
         }
 
         function getParameterByName(name, url) {
@@ -178,5 +199,3 @@
 
     });
 }
-
-
