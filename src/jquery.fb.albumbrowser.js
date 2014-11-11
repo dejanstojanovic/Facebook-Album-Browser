@@ -2,7 +2,7 @@
     var defaults = {
         account: "",
         showAccountInfo: true,
-        showImageCount:true,
+        showImageCount: true,
         skipEmptyAlbums: true,
         skipAlbums: []
     }
@@ -65,13 +65,11 @@
                                     }
                                 }
                             });
-
                             albumListItem.append($("<div>", { class: "fb-album-title", text: $(result.data).get(a).name }));
                             if (settings.showImageCount) {
                                 albumListItem.append($("<div>", { class: "fb-album-count", text: $(result.data).get(a).count }));
                             }
                             $(albumList).append(albumListItem);
-
                             $(albumListItem).click(function () {
                                 var self = $(this);
                                 $(selector).append($("<div>", { class: "fb-album-preview" }));
@@ -112,7 +110,6 @@
                 cache: false,
                 dataType: 'jsonp',
                 success: function (result) {
-
                     for (a = 0; a < result.data.length; a++) {
                         var photoListItem = $("<li>", { class: "fb-photo" });
                         var prefWidth = photoListItem.width();
@@ -131,7 +128,6 @@
                         photoListItem.append(photoLink);
                         container.append(photoListItem);
                     }
-
                     if (result.paging && result.paging.next && result.paging.next != "") {
                         loadPhotos(result.paging.next, container);
                     }
@@ -145,11 +141,11 @@
         function addAccountInfo(container) {
             var accountInfoContainer = $("<div>", { class: "fb-account-info" });
             accountInfoContainer.append($("<img>", { src: "https://graph.facebook.com/" + settings.account + "/picture?type=square" }));
-            accountInfoContainer.append($("<h3>", {class:"fb-account-heading"}));
+            accountInfoContainer.append($("<h3>", { class: "fb-account-heading" }));
             $(container).append(accountInfoContainer);
             $.ajax({
                 type: 'GET',
-                url: "https://graph.facebook.com/"+settings.account,
+                url: "https://graph.facebook.com/" + settings.account,
                 cache: false,
                 dataType: 'jsonp',
                 success: function (result) {
@@ -158,30 +154,75 @@
             });
         }
 
-
         function initLightboxes() {
             var overlay = $(".fb-preview-overlay");
             if (overlay.length == 0) {
                 overlay = $("<div>", { class: "fb-preview-overlay" });
-                overlay.append($("<img>"));
+                overlay.append($("<img>", { class: "fb-preview-img-prev", src: "src/prev-icon.png" }));
+                overlay.append($("<img>", { class: "fb-preview-img" }));
+                overlay.append($("<img>", { class: "fb-preview-img-next", src: "src/next-icon.png" }));
                 $("body").append(overlay);
                 overlay = $(".fb-preview-overlay");
-
                 $(overlay).click(function () {
                     $(this).fadeOut();
+                });
+                $(overlay).find(".fb-preview-img").click(function () {
+                    $(this).parent().find("img.fb-preview-img-next").click();
+                    return false;
                 });
             }
             else {
                 overlay = $(".fb-preview-overlay");
             }
             $("a.fb-photo-thumb-link").unbind("click");
-            $("a.fb-photo-thumb-link").click( function (event) {
+            $("a.fb-photo-thumb-link").click(function (event) {
                 var overlay = $(".fb-preview-overlay");
-                var previewImage = overlay.find("img");
+                var previewImage = overlay.find("img.fb-preview-img");
                 previewImage.hide();
+                overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").hide();
+                
+
                 previewImage.attr("src", $(this).attr("href"));
                 previewImage.load(function () {
                     $(this).attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
+                    overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
+
+                    var prevImg = overlay.find("img.fb-preview-img-prev");
+                    prevImg.show();
+                    prevImg.unbind("click");
+                    prevImg.click(function () {
+                        var currentImage = $(this).parent().find(".fb-preview-img");
+                        var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
+                        if (currentImageLinkItem.length != 0) {
+                            var prev = currentImageLinkItem.parent().prev();
+                            if (prev.length != 0) {
+                                previewImage.attr("src", prev.find(".fb-photo-thumb-link").attr("href"));
+                            }
+                            else {
+                                previewImage.attr("src", currentImageLinkItem.parent().parent().find("li").last().find(".fb-photo-thumb-link").attr("href"));
+                            }
+                        }
+                        return false;
+                    });
+
+                    var nextImg = overlay.find("img.fb-preview-img-next");
+                    nextImg.show();
+                    nextImg.unbind("click");
+                    nextImg.click(function () {
+                        var currentImage = $(this).parent().find(".fb-preview-img");
+                        var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
+                        if (currentImageLinkItem.length != 0) {
+                            var next = currentImageLinkItem.parent().next();
+                            if (next.length != 0) {
+                                previewImage.attr("src", next.find(".fb-photo-thumb-link").attr("href"));
+                            }
+                            else {
+                                previewImage.attr("src", currentImageLinkItem.parent().parent().find("li").first().find(".fb-photo-thumb-link").attr("href"));
+                            }
+                        }
+                        return false;
+                    });
+
                     $(this).fadeIn();
                 });
                 overlay.fadeIn();
