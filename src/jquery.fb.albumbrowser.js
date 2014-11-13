@@ -1,6 +1,7 @@
 ﻿$.fn.FacebookAlbumBrowser = function (options) {
     var defaults = {
         account: "",
+        acessToken: "",
         showAccountInfo: true,
         showImageCount: true,
         skipEmptyAlbums: true,
@@ -17,7 +18,12 @@
             class: "fb-albums"
         }));
         var albumList = $(container).find(".fb-albums");
-        loadAlbums("http://graph.facebook.com/" + settings.account + "/albums");
+        var invokeUrl = "https://graph.facebook.com/" + settings.account + "/albums";
+        if (settings.acessToken != "") {
+            invokeUrl += "?access_token=" + settings.acessToken;
+        }
+
+        loadAlbums(invokeUrl);
         function loadAlbums(url) {
             $.ajax({
                 type: 'GET',
@@ -34,9 +40,13 @@
                             continue;
                         }
                         else {
+                            var invokeUrl = "https://graph.facebook.com/" + $(result.data).get(a).cover_photo;
+                            if (settings.acessToken != "") {
+                                invokeUrl += "?access_token=" + settings.acessToken;
+                            }
                             $.ajax({
                                 type: 'GET',
-                                url: "https://graph.facebook.com/" + $(result.data).get(a).cover_photo,
+                                url: invokeUrl,
                                 cache: false,
                                 data: { album: $(result.data).get(a).id },
                                 dataType: 'jsonp',
@@ -84,8 +94,12 @@
                                 });
                                 $(previewContainer).append($("<ul>", { class: "fb-photos" }));
                                 photosContainer = $(previewContainer).find("ul.fb-photos");
-                                loadPhotos("https://graph.facebook.com/" + $(self).attr("data-id") + "/photos", photosContainer);
 
+                                var invokeUrl = "https://graph.facebook.com/" + $(self).attr("data-id") + "/photos";
+                                if (settings.acessToken != "") {
+                                    invokeUrl += "?access_token=" + settings.acessToken;
+                                }
+                                loadPhotos(invokeUrl, photosContainer);
                                 $(selector).find("ul.fb-albums").fadeOut(function () {
                                     previewContainer.fadeIn();
                                 });
@@ -180,7 +194,7 @@
                 var previewImage = overlay.find("img.fb-preview-img");
                 previewImage.hide();
                 overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").hide();
-                
+
 
                 previewImage.attr("src", $(this).attr("href"));
                 previewImage.load(function () {
