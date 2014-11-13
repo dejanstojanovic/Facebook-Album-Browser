@@ -141,13 +141,14 @@
                         photoLink.append($("<img>", { style: "margin-left:" + (prefWidth - albumImg.width) / 2 + "px;", "data-id": $(result.data).get(0).id, class: "fb-photo-thumb", src: albumImg.source }));
                         photoListItem.append(photoLink);
                         container.append(photoListItem);
+                        initLightboxes(container.find("a.fb-photo-thumb-link"));
                     }
                     if (result.paging && result.paging.next && result.paging.next != "") {
                         loadPhotos(result.paging.next, container);
                     }
-                    else {
-                        initLightboxes();
-                    }
+                    //else {
+                    //    initLightboxes();
+                    //}
                 }
             });
         }
@@ -168,7 +169,7 @@
             });
         }
 
-        function initLightboxes() {
+        function initLightboxes(photoLink) {
             var overlay = $(".fb-preview-overlay");
             if (overlay.length == 0) {
                 overlay = $("<div>", { class: "fb-preview-overlay" });
@@ -188,8 +189,10 @@
             else {
                 overlay = $(".fb-preview-overlay");
             }
-            $("a.fb-photo-thumb-link").unbind("click");
-            $("a.fb-photo-thumb-link").click(function (event) {
+            //$("a.fb-photo-thumb-link").unbind("click");
+            //$("a.fb-photo-thumb-link").click(function (event) {
+            $(photoLink).unbind("click");
+            $(photoLink).click(function (event) {
                 var overlay = $(".fb-preview-overlay");
                 var previewImage = overlay.find("img.fb-preview-img");
                 previewImage.hide();
