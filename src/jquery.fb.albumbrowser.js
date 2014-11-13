@@ -138,7 +138,11 @@
                             }
                         }
                         var photoLink = $("<a>", { class: "fb-photo-thumb-link", href: $(result.data)[a].source });
-                        photoLink.append($("<img>", { style: "margin-left:" + (prefWidth - albumImg.width) / 2 + "px;", "data-id": $(result.data).get(0).id, class: "fb-photo-thumb", src: albumImg.source }));
+                        var marginWidth = 0;
+                        if (prefWidth > 0) {
+                            marginWidth = (prefWidth - albumImg.width) / 2;
+                        }
+                        photoLink.append($("<img>", { style: "margin-left:" + marginWidth + "px;", "data-id": $(result.data).get(0).id, class: "fb-photo-thumb", src: albumImg.source }));
                         photoListItem.append(photoLink);
                         container.append(photoListItem);
                         initLightboxes(container.find("a.fb-photo-thumb-link"));
