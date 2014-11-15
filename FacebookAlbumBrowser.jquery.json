@@ -4,8 +4,8 @@
     "description": "Reponsive jQuery plugin for browsing public albums of a Facebook account. Plugin is suitable for both desktop and mobile websites.",
     "keywords": [
 	"facebook",
-    	"photos",
-    	"album",
+    "photos",
+    "album",
 	"browse"
     ],
     "version": "0.8.1",
