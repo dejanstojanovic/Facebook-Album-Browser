@@ -1,0 +1,36 @@
+{
+    "name": "Facebook Album Browser",
+    "title": "jQuery Facebook Album Browser",
+    "description": "Reponsive jQuery plugin for browsing public albums of a Facebook account. Plugin is suitable for both desktop and mobile websites.",
+    "keywords": [
+	"facebook",
+    	"photos",
+    	"album",
+	"browse"
+    ],
+    "version": "0.8.1",
+    "author": {
+        "name": "Dejan Stojanovic",
+        "url": "https://github.com/dejanstojanovic/Facebook-Album-Browser"
+    },
+    "maintainers": [
+        {
+            "name": "Dejan Stojanovic",
+            "email": "d.stojanovic@hotmail.com",
+            "url": "http://dejanstojanovic.net"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/dejanstojanovic/Facebook-Album-Browser/blob/master/LICENSE"
+        }
+    ],
+    "bugs": "https://github.com/dejanstojanovic/Facebook-Album-Browser/issues",
+    "homepage": "https://github.com/dejanstojanovic/Facebook-Album-Browser",
+    "docs": "hhttps://github.com/dejanstojanovic/Facebook-Album-Browser",
+    "download": "https://github.com/dejanstojanovic/Facebook-Album-Browser/archive/master.zip",
+    "dependencies": {
+        "jquery": ">=1.11.0"
+    }
+}
