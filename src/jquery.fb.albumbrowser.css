@@ -32,8 +32,8 @@ ul.fb-albums, ul.fb-photos
 li.fb-album, li.fb-photo
 {
     display: inline-block;
-    width: 206px;
-    height: 206px;
+    width: 130px;
+    height: 130px;
     overflow: hidden;
     padding: 0px;
     background-color: #f7f7f7;
