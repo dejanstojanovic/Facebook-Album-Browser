@@ -17,7 +17,14 @@
                 account: "natgeo",
                 skipAlbums: ["Profile Pictures", "Timeline Photos"],
                 showAccountInfo: false,
-                showImageCount: true
+                showImageCount: true,
+                lightbox: true,
+                albumSelected: function (photo) {
+                    console.log("ALBUM CLICK: " + photo.id + " - " + photo.url);
+                },
+                photoSelected: function (photo) {
+                    console.log("PHOTO CLICK: " + photo.id + " - " + photo.url);
+                }
             });
 
         });
