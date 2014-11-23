@@ -46,3 +46,9 @@ The following are events raised by plugin:
 [Checkout demo on plunker](http://plnkr.co/edit/bpcaagDgxVClt1lsDH5a?p=preview)
 
 ![ScreenShot](http://dejanstojanovic.net/media/31597/facebook-album-browser.png)
+
+###Notes
+In order to make this plugin work with Facebook account photos you need to allow **user_photos** permission in your Facebook App that is used to authenticate and add permissions.
+Please read the article on Facebook https://developers.facebook.com/docs/apps/review.
+
+For testing purposes you can use Facebook App test users. More about using test users you can find at https://developers.facebook.com/docs/apps/test-users/.
