@@ -7,7 +7,9 @@
     font-weight: lighter;
     color: rgba(59, 89, 152, 1);
 }
-
+h3.fb-album-heading{
+    cursor:pointer;
+}
 ul.fb-albums, ul.fb-photos
 {
     list-style: none;
@@ -84,23 +86,15 @@ div.fb-album-count
     text-decoration: none;
 }
 
-button.fb-albums-list
+img.fb-albums-list
 {
-    background-color: rgba(59, 89, 152, 1);
-    border: medium none;
-    color: #fff;
-    font-size: 16px;
-    padding: 6px;
+    border: none;
     display: inline-block;
     cursor: pointer;
     margin-bottom: 10px;
-    border-radius: 6px;
+    vertical-align:middle;
 }
 
-    button.fb-albums-list:hover
-    {
-        background-color: rgba(59, 89, 152, 0.7);
-    }
 
 .fb-account-info
 {

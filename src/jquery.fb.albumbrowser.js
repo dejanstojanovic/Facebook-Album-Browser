@@ -87,9 +87,15 @@
                                 var self = $(this);
                                 $(selector).append($("<div>", { class: "fb-album-preview" }));
                                 var previewContainer = selector.find(".fb-album-preview");
-                                previewContainer.append($("<button>", { type: "button", text: "<", class: "fb-albums-list" }));
+                                previewContainer.append($("<img>", {
+                                    alt: "",
+                                    height: 32,
+                                    width: 32,
+                                    src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIyMnB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyMiAyMiIgd2lkdGg9IjIycHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZWZzPjxwYXRoIGQ9Ik0wLDExIEMwLDQuOTI0ODY3NDUgNC45MjQ4Njc0NSwwIDExLDAgQzE3LjA3NTEzMjUsMCAyMiw0LjkyNDg2NzQ1IDIyLDExIEMyMiwxNy4wNzUxMzI1IDE3LjA3NTEzMjUsMjIgMTEsMjIgQzQuOTI0ODY3NDUsMjIgMCwxNy4wNzUxMzI1IDAsMTEgTDAsMTEgWiBNMjEsMTEgQzIxLDUuNDc3MTUyMjUgMTYuNTIyODQ3OCwxIDExLDEgQzUuNDc3MTUyMjUsMSAxLDUuNDc3MTUyMjUgMSwxMSBDMSwxNi41MjI4NDc4IDUuNDc3MTUyMjUsMjEgMTEsMjEgQzE2LjUyMjg0NzgsMjEgMjEsMTYuNTIyODQ3OCAyMSwxMSBMMjEsMTEgWiBNNS41LDExIEw4LjUsMTUgTDkuNSwxNSBMNi43NSwxMS40OTg0Mzc1IEwxNi41LDExLjQ5ODQzNzQgTDE2LjUsMTAuNSBMNi43NSwxMC41IEw5LjUsNyBMOC41LDcgTDUuNSwxMSBMNS41LDExIFoiIGlkPSJwYXRoLTEiLz48L2RlZnM+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBpZD0ibWl1IiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSI+PGcgaWQ9ImNpcmNsZV9hcnJvdy1iYWNrX3ByZXZpb3VzX291dGxpbmVfc3Ryb2tlIj48dXNlIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgeGxpbms6aHJlZj0iI3BhdGgtMSIvPjx1c2UgZmlsbD0ibm9uZSIgeGxpbms6aHJlZj0iI3BhdGgtMSIvPjwvZz48L2c+PC9zdmc+",
+                                    class: "fb-albums-list"
+                                }));
                                 previewContainer.append($("<h3>", { class: "fb-album-heading", text: $(self).find(".fb-album-title").text() }));
-                                previewContainer.find("button.fb-albums-list").click(function () {
+                                previewContainer.find("img.fb-albums-list,h3.fb-album-heading").click(function () {
                                     previewContainer.fadeOut(function () {
                                         $(selector).find(".fb-albums").fadeIn();
                                         previewContainer.remove();
@@ -164,8 +170,10 @@
 
         function addAccountInfo(container) {
             var accountInfoContainer = $("<div>", { class: "fb-account-info" });
-            accountInfoContainer.append($("<img>", { src: "https://graph.facebook.com/" + settings.account + "/picture?type=square" }));
-            accountInfoContainer.append($("<h3>", { class: "fb-account-heading" }));
+            var accountInfoLink = $("<a>", { target: "_blank", href: "" });
+            accountInfoContainer.append(accountInfoLink);
+            accountInfoLink.append($("<img>", { src: "https://graph.facebook.com/" + settings.account + "/picture?type=square" }));
+            accountInfoLink.append($("<h3>", { class: "fb-account-heading" }));
             $(container).append(accountInfoContainer);
             $.ajax({
                 type: 'GET',
@@ -174,6 +182,7 @@
                 dataType: 'jsonp',
                 success: function (result) {
                     $(container).find(".fb-account-info").find(".fb-account-heading").text(result.name);
+                    $(container).find(".fb-account-info").find("a").attr("href", "http://facebook.com/" + (!result.username ? result.id : result.username));
                 }
             });
         }
