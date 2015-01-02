@@ -12,12 +12,21 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".fb-album-container").FacebookAlbumBrowser({
+          $(".fb-album-container").FacebookAlbumBrowser({
                 account: "natgeo",
                 skipAlbums: ["Profile Pictures", "Timeline Photos"],
                 showAccountInfo: true,
                 showImageCount: true,
                 lightbox: true,
+                photosCheckbox: true,
+                photoChecked: function(photo){
+                    console.log("PHOTO CHECKED: " + photo.id + " - " + photo.url);
+                    console.log("CHECKED PHOTOS COUNT: " + this.checkedPhotos.length);
+                },
+                photoUnchecked: function (photo) {
+                    console.log("PHOTO UNCHECKED: " + photo.id + " - " + photo.url);
+                    console.log("CHECKED PHOTOS COUNT: " + this.checkedPhotos.length);
+                },
                 albumSelected: function (photo) {
                     console.log("ALBUM CLICK: " + photo.id + " - " + photo.url);
                 },

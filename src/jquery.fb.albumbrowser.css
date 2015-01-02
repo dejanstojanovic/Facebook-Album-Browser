@@ -46,8 +46,29 @@ li.fb-album, li.fb-photo
     background-position: center center;
     background-repeat: no-repeat;
     cursor: pointer;
+    /*border:2px solid #fff;*/
+}
+li.fb-photo:hover{
+    /*border:2px solid rgba(59,89,152,1);*/
 }
 
+li.fb-photo:hover .image-check{
+    display:block;
+}
+li.fb-photo .image-check{
+    display:none;
+    position:absolute;
+    width:25px;
+    height:25px;
+    background-color:rgba(59,89,152,1);
+}
+li.fb-photo .image-check.checked
+{
+    display:block;
+    background-image:url('check.png');
+    background-position:left top;
+    background-repeat:no-repeat;
+}
     li.fb-album img
     {
         display: none;
