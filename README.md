@@ -36,14 +36,49 @@ The following are options for the plugin which are used to congigure the plugin 
 * **skipEmptyAlbums** - Skip albums for which plugin was unable to fetch at least one photo. Default value is _true_
 * **skipAlbums** - List of IDs or names or combined IDs and names of albums which will not be browsed (e.g ["Profile Pictures", "Timeline Photos"]). Default value is _[]_
 * **lightbox** - Show full size image in a lightbox style when clicked. Default value is _true_
+* **photosCheckbox** - Allows using of plugin as an image multipicker. Default value is _true_
  
 ###Events
 The following are events raised by plugin:
 * **albumSelected** - Handler function for event raised when album is selecetd in the browser. Default value is _null_
 * **photoSelected** - Handler function for event raised when photo is selecetd in the browser. Default value is _null_
+* **photoChecked** - Handler function for event raised when photo is checked. Default value is _null_
+* **photoUnchecked** - Handler function for event raised when photo is unchecked. Default value is _null_
+
+"Every event functin returns an object which holds three properties (id - image id in Facebook database, url - large image url, thumb - thumbnail imagge url)
 
 ###Demo
-[Checkout demo on plunker](http://plnkr.co/edit/bpcaagDgxVClt1lsDH5a?p=preview)
+Test document test.html is contained in the soolution. You can download it for testing or use the following code:
+
+```html
+<div class="fb-album-container"></div>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+      $(".fb-album-container").FacebookAlbumBrowser({
+        account: "natgeo",
+        skipAlbums: ["Profile Pictures", "Timeline Photos"],
+        showAccountInfo: true,
+        showImageCount: true,
+        lightbox: true,
+        photosCheckbox: true,
+        photoChecked: function(photo) {
+          //Handles photo checkbox checked
+        },
+        photoUnchecked: function(photo) {
+          //Handles photo checkbox unchecked
+        },
+        albumSelected: function(photo) {
+          //Handles album thumbnail clicked event
+        },
+        photoSelected: function(photo) {
+          //Handles photo thumbnail click event
+        }
+      });
+    });
+</script>
+```
+To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit/bpcaagDgxVClt1lsDH5a?p=preview)
 
 ![ScreenShot](http://dejanstojanovic.net/media/31597/facebook-album-browser.png)
 
