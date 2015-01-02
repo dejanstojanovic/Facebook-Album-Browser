@@ -45,7 +45,10 @@ The following are events raised by plugin:
 * **photoChecked** - Handler function for event raised when photo is checked. Default value is _null_
 * **photoUnchecked** - Handler function for event raised when photo is unchecked. Default value is _null_
 
-"Every event functin returns an object which holds three properties (id - image id in Facebook database, url - large image url, thumb - thumbnail imagge url)
+Every event functin returns an object which holds three properties:
+* **id** - image id in Facebook database
+* **url** - large image url
+* **thumb** - thumbnail image url
 
 ###Demo
 Test document test.html is contained in the soolution. You can download it for testing or use the following code:
