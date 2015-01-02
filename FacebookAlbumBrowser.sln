@@ -8,20 +8,20 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "trunk", "http://localhost:3
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_33950"
-		Debug.AspNetCompiler.PhysicalPath = "D:\GitHub\Facebook-Album-Browser.git\trunk\"
+		Debug.AspNetCompiler.PhysicalPath = "..\trunk\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_33950\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_33950"
-		Release.AspNetCompiler.PhysicalPath = "D:\GitHub\Facebook-Album-Browser.git\trunk\"
+		Release.AspNetCompiler.PhysicalPath = "..\trunk\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_33950\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "D:\GitHub\Facebook-Album-Browser.git\trunk\"
+		SlnRelativePath = "..\trunk\"
 	EndProjectSection
 EndProject
 Global
