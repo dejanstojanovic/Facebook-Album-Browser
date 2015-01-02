@@ -13,9 +13,9 @@
             photoSelected: null,
             photoChecked: null,
             photoUnchecked: null,
-            checkedPhotos : []
+            checkedPhotos: []
         }
-        
+
         var settings = $.extend({}, defaults, options);
         var selector = $(this);
 
@@ -117,7 +117,11 @@
                                     }
 
                                     if (settings.albumSelected != null && typeof (settings.albumSelected) == "function") {
-                                        settings.albumSelected({ id: $(self).attr("data-id"), url: invokeUrl });
+                                        settings.albumSelected({
+                                            id: $(self).attr("data-id"),
+                                            url: invokeUrl,
+                                            thumb: $(self).find("img.fb-album-thumb").attr("src")
+                                        });
                                     }
 
                                     loadPhotos(invokeUrl, photosContainer);
