@@ -200,16 +200,19 @@
                             }
 
                             photoLink.append($("<img>", { style: "margin-left:" + marginWidth + "px;", "data-id": $(result.data).get(a).id, class: "fb-photo-thumb", src: albumImg.source }));
-                            photoListItem.append(imageCheck);
+                            if (settings.photosCheckbox) {
+                                photoListItem.append(imageCheck);
+                                for (i = 0; i < settings.checkedPhotos.length; i++) {
+                                    if (settings.checkedPhotos[i].id == $(result.data).get(a).id) {
+                                        imageCheck.addClass("checked");
+                                        break;
+                                    }
+                                }
+                            }
                             photoListItem.append(photoLink);
                             container.append(photoListItem);
                             initLightboxes(container.find("a.fb-photo-thumb-link"));
-                            for (i = 0; i < settings.checkedPhotos.length; i++) {
-                                if (settings.checkedPhotos[i].id == $(result.data).get(a).id) {
-                                    imageCheck.addClass("checked");
-                                    break;
-                                }
-                            }
+                            
                         }
                         if (result.paging && result.paging.next && result.paging.next != "") {
                             loadPhotos(result.paging.next, container);
