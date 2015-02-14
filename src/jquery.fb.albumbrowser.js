@@ -279,6 +279,7 @@
                         overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").hide();
                         previewImage.attr("src", $(this).attr("href"));
                         previewImage.load(function () {
+                            $(this).show();
                             $(this).attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
                             overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
 
