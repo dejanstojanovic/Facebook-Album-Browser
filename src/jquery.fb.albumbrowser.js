@@ -278,11 +278,13 @@
                         previewImage.hide();
                         overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").hide();
                         previewImage.attr("src", $(this).attr("href"));
+                        if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
+                            $(previewImage).show();
+                        }
                         previewImage.load(function () {
-                            $(this).show();
                             $(this).attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
+                            $(this).show();
                             overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
-
                             var prevImg = overlay.find("img.fb-preview-img-prev");
                             prevImg.show();
                             prevImg.unbind("click");
