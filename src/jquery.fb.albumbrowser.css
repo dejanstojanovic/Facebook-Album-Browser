@@ -170,3 +170,14 @@ img.fb-albums-list
 .fb-photo-text{
     display:none;
 }
+.fb-preview-text{
+    display:block;
+    background-color:#e1e2e3;
+    margin-left: auto;
+    margin-right: auto;
+    font-size:12px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align:left;
+    padding:6px;
+    display:none;
+}

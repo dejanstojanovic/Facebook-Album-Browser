@@ -13,6 +13,7 @@
             photoSelected: null,
             photoChecked: null,
             photoUnchecked: null,
+            showImageText:false,
             checkedPhotos: []
         }
 
@@ -210,6 +211,10 @@
                                 });
                             }
                             var photoThumb = $("<img>", { style: "margin-left:" + marginWidth + "px;display:none;", "data-id": $(result.data).get(a).id, class: "fb-photo-thumb", "data-src": albumImg.source, src: "" });
+                            var photoText = $("<span>", { class: "fb-photo-text" });
+                            photoText.text($(result.data).get(a).name);
+                            photoLink.append(photoText);
+
                             photoLink.append(photoThumb);
                             if (settings.photosCheckbox) {
                                 photoListItem.append(imageCheck);
@@ -284,6 +289,9 @@
                     overlay.append($("<img>", { class: "fb-preview-img-prev", src: "src/prev-icon.png" }));
                     overlay.append($("<img>", { class: "fb-preview-img" }));
                     overlay.append($("<img>", { class: "fb-preview-img-next", src: "src/next-icon.png" }));
+                    if (settings.showImageText) {
+                        overlay.append($("<span>", { class: "fb-preview-text" }));
+                    }
                     $("body").append(overlay);
                     overlay = $(".fb-preview-overlay");
                     $(overlay).click(function () {
@@ -301,6 +309,8 @@
 
                 $(photoLink).unbind("click");
                 $(photoLink).click(function (event) {
+                    $(".fb-preview-text").hide();
+                    $(".fb-preview-text").text($(this).find(".fb-photo-text").text());
                     var eventObj = {
                         id: $(this).find("img.fb-photo-thumb").attr("data-id"),
                         url: $(this).attr("href"),
@@ -315,10 +325,13 @@
                         previewImage.hide();
                         overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").hide();
                         previewImage.attr("src", $(this).attr("href"));
+
                         if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
                             $(previewImage).show();
                         }
                         previewImage.load(function () {
+                            $(".fb-preview-text").css("display", "block");
+                            $(".fb-preview-text").width($(this).width()-12);
                             $(this).attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
                             $(this).show();
                             overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
@@ -326,16 +339,22 @@
                             prevImg.show();
                             prevImg.unbind("click");
                             prevImg.click(function () {
+                                $(".fb-preview-text").css("display", "block");
                                 var currentImage = $(this).parent().find(".fb-preview-img");
                                 var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
                                 if (currentImageLinkItem.length != 0) {
                                     var prev = currentImageLinkItem.parent().prev();
+                                    var prevImg = null;
                                     if (prev.length != 0) {
-                                        previewImage.attr("src", prev.find(".fb-photo-thumb-link").attr("href"));
+                                        prevImg = prev.find(".fb-photo-thumb-link");
+                                        previewImage.attr("src", prevImg.attr("href"));
                                     }
                                     else {
-                                        previewImage.attr("src", currentImageLinkItem.parent().parent().find("li").last().find(".fb-photo-thumb-link").attr("href"));
+                                        prevImg=currentImageLinkItem.parent().parent().find("li").last().find(".fb-photo-thumb-link");
+                                        previewImage.attr("src", prevImg.attr("href"));
                                     }
+                                    $(".fb-preview-text").hide();
+                                    $(".fb-preview-text").text(prevImg.text());
                                 }
                                 return false;
                             });
@@ -344,16 +363,22 @@
                             nextImg.show();
                             nextImg.unbind("click");
                             nextImg.click(function () {
+                                $(".fb-preview-text").css("display", "block");
                                 var currentImage = $(this).parent().find(".fb-preview-img");
                                 var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
                                 if (currentImageLinkItem.length != 0) {
                                     var next = currentImageLinkItem.parent().next();
+                                    var nextImg =null;
                                     if (next.length != 0) {
-                                        previewImage.attr("src", next.find(".fb-photo-thumb-link").attr("href"));
+                                       nextImg = next.find(".fb-photo-thumb-link");
+                                        previewImage.attr("src", nextImg.attr("href"));
                                     }
                                     else {
-                                        previewImage.attr("src", currentImageLinkItem.parent().parent().find("li").first().find(".fb-photo-thumb-link").attr("href"));
+                                        nextImg = currentImageLinkItem.parent().parent().find("li").first().find(".fb-photo-thumb-link");
+                                        previewImage.attr("src", nextImg.attr("href"));
                                     }
+                                    $(".fb-preview-text").hide();
+                                    $(".fb-preview-text").text(nextImg.text());
                                 }
                                 return false;
                             });
