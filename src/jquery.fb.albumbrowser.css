@@ -167,3 +167,6 @@ img.fb-albums-list
 {
     margin-left: 10px;
 }
+.fb-photo-text{
+    display:none;
+}
