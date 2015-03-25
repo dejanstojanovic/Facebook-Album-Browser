@@ -74,10 +74,21 @@
                                                     albumImg = $(cover.images)[i];
                                                 }
                                             }
+                                            var albumThumb = $("<img>", { style: "margin-left:" + (prefWidth - albumImg.width) / 2 + "px; display:none;", "data-id": $(cover).get(0).id, class: "fb-album-thumb", "data-src": albumImg.source, src: "" })
+                                            listItem.append(albumThumb);
 
-                                            listItem.append($("<img>", { style: "margin-left:" + (prefWidth - albumImg.width) / 2 + "px;", "data-id": $(cover).get(0).id, class: "fb-album-thumb", src: albumImg.source }));
-                                            listItem.find("img").load(function () {
+                                            $(albumThumb).load(function () {
                                                 $(this).fadeIn(300);
+                                            });
+
+                                            loadIfVisible(albumThumb);
+                                            $(window).scroll(function () {
+                                                $(".fb-album-thumb[src='']").each(function () {
+                                                    return loadIfVisible($(this));
+                                                });
+                                                $(".fb-photo-thumb[src='']").each(function () {
+                                                    return loadIfVisible($(this));
+                                                });
                                             });
                                         }
                                         else {
@@ -198,8 +209,8 @@
                                     return false;
                                 });
                             }
-
-                            photoLink.append($("<img>", { style: "margin-left:" + marginWidth + "px;", "data-id": $(result.data).get(a).id, class: "fb-photo-thumb", src: albumImg.source }));
+                            var photoThumb = $("<img>", { style: "margin-left:" + marginWidth + "px;display:none;", "data-id": $(result.data).get(a).id, class: "fb-photo-thumb", "data-src": albumImg.source, src: "" });
+                            photoLink.append(photoThumb);
                             if (settings.photosCheckbox) {
                                 photoListItem.append(imageCheck);
                                 for (i = 0; i < settings.checkedPhotos.length; i++) {
@@ -211,14 +222,40 @@
                             }
                             photoListItem.append(photoLink);
                             container.append(photoListItem);
+                            $(photoThumb).load(function () {
+                                $(this).fadeIn(300);
+                            });
+                            loadIfVisible(photoThumb);
                             initLightboxes(container.find("a.fb-photo-thumb-link"));
-                            
                         }
                         if (result.paging && result.paging.next && result.paging.next != "") {
                             loadPhotos(result.paging.next, container);
                         }
                     }
                 });
+            }
+
+            function loadIfVisible(photoThumb) {
+                var element = null;
+                if ($(photoThumb).hasClass("fb-photo-thumb")) {
+                    element = $(photoThumb).parent().parent();
+                }
+                else if ($(photoThumb).hasClass("fb-album-thumb")) {
+                    element = $(photoThumb).parent();
+                }
+
+                if (element != null) {
+                    if (isScrolledIntoView($(element)) && $(photoThumb).attr("src") == "") {
+                        $(photoThumb).attr("src", $(photoThumb).attr("data-src"));
+                        $(photoThumb).removeAttr("data-src");
+
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                return true;
             }
 
             function addAccountInfo(container) {
@@ -320,7 +357,6 @@
                                 }
                                 return false;
                             });
-
                             $(this).fadeIn();
                         });
                         overlay.fadeIn();
@@ -330,8 +366,6 @@
                     }
                 }
                 );
-
-
             }
 
             function getParameterByName(name, url) {
@@ -339,6 +373,17 @@
                 var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
                     results = regex.exec(url);
                 return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            function isScrolledIntoView(elem) {
+                var $elem = $(elem);
+                var $window = $(window);
+                var docViewTop = $window.scrollTop();
+                var docViewBottom = docViewTop + $window.height();
+                var elemTop = $elem.offset().top;
+                var elemBottom = elemTop + $elem.height();
+                //return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+                return (elemTop <= docViewBottom);
             }
 
         });
