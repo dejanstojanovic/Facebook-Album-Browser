@@ -309,8 +309,9 @@
 
                 $(photoLink).unbind("click");
                 $(photoLink).click(function (event) {
-                    $(".fb-preview-text").hide();
-                    $(".fb-preview-text").text($(this).find(".fb-photo-text").text());
+                    var previewText = $(".fb-preview-text");
+                    previewText.hide();
+                    previewText.text($(this).find(".fb-photo-text").text());
                     var eventObj = {
                         id: $(this).find("img.fb-photo-thumb").attr("data-id"),
                         url: $(this).attr("href"),
@@ -330,8 +331,10 @@
                             $(previewImage).show();
                         }
                         previewImage.load(function () {
-                            $(".fb-preview-text").css("display", "block");
-                            $(".fb-preview-text").width($(this).width()-12);
+                            if (previewText.text().trim()!="") {
+                                previewText.css("display", "block");
+                            }
+                            previewText.width($(this).width() - 12);
                             $(this).attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
                             $(this).show();
                             overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
@@ -339,7 +342,7 @@
                             prevImg.show();
                             prevImg.unbind("click");
                             prevImg.click(function () {
-                                $(".fb-preview-text").css("display", "block");
+
                                 var currentImage = $(this).parent().find(".fb-preview-img");
                                 var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
                                 if (currentImageLinkItem.length != 0) {
@@ -353,8 +356,8 @@
                                         prevImg=currentImageLinkItem.parent().parent().find("li").last().find(".fb-photo-thumb-link");
                                         previewImage.attr("src", prevImg.attr("href"));
                                     }
-                                    $(".fb-preview-text").hide();
-                                    $(".fb-preview-text").text(prevImg.text());
+                                    previewText.hide();
+                                    previewText.text(prevImg.text());
                                 }
                                 return false;
                             });
@@ -363,7 +366,7 @@
                             nextImg.show();
                             nextImg.unbind("click");
                             nextImg.click(function () {
-                                $(".fb-preview-text").css("display", "block");
+
                                 var currentImage = $(this).parent().find(".fb-preview-img");
                                 var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
                                 if (currentImageLinkItem.length != 0) {
@@ -377,8 +380,8 @@
                                         nextImg = currentImageLinkItem.parent().parent().find("li").first().find(".fb-photo-thumb-link");
                                         previewImage.attr("src", nextImg.attr("href"));
                                     }
-                                    $(".fb-preview-text").hide();
-                                    $(".fb-preview-text").text(nextImg.text());
+                                    previewText.hide();
+                                    previewText.text(nextImg.text());
                                 }
                                 return false;
                             });
