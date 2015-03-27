@@ -86,6 +86,9 @@ To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit
 
 ![ScreenShot](http://dejanstojanovic.net/media/31597/facebook-album-browser.png)
 
+
+![ScreenShot](http://dejanstojanovic.net/media/31657/faceboo-phptp-preview.png)
+
 ###Notes
 In order to make this plugin work with Facebook account photos you need to allow **user_photos** permission in your Facebook App that is used to authenticate and add permissions.
 Please read the article on Facebook https://developers.facebook.com/docs/apps/review.
