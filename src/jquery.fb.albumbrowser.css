@@ -181,3 +181,6 @@ img.fb-albums-list
     padding:6px;
     display:none;
 }
+.fb-preview-text a{
+    color:rgba(59, 89, 152, 1);
+}

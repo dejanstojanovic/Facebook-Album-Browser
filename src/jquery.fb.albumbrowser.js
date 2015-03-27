@@ -13,7 +13,7 @@
             photoSelected: null,
             photoChecked: null,
             photoUnchecked: null,
-            showImageText:false,
+            showImageText: false,
             checkedPhotos: []
         }
 
@@ -311,7 +311,9 @@
                 $(photoLink).click(function (event) {
                     var previewText = $(".fb-preview-text");
                     previewText.hide();
-                    previewText.text($(this).find(".fb-photo-text").text());
+
+                    previewText.html(parseLinks($(this).find(".fb-photo-text").text()));
+
                     var eventObj = {
                         id: $(this).find("img.fb-photo-thumb").attr("data-id"),
                         url: $(this).attr("href"),
@@ -331,7 +333,7 @@
                             $(previewImage).show();
                         }
                         previewImage.load(function () {
-                            if (previewText.text().trim()!="") {
+                            if (previewText.text().trim() != "") {
                                 previewText.css("display", "block");
                             }
                             previewText.width($(this).width() - 12);
@@ -353,11 +355,11 @@
                                         previewImage.attr("src", prevImg.attr("href"));
                                     }
                                     else {
-                                        prevImg=currentImageLinkItem.parent().parent().find("li").last().find(".fb-photo-thumb-link");
+                                        prevImg = currentImageLinkItem.parent().parent().find("li").last().find(".fb-photo-thumb-link");
                                         previewImage.attr("src", prevImg.attr("href"));
                                     }
                                     previewText.hide();
-                                    previewText.text(prevImg.text());
+                                    previewText.html(parseLinks(prevImg.text()));
                                 }
                                 return false;
                             });
@@ -371,9 +373,9 @@
                                 var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
                                 if (currentImageLinkItem.length != 0) {
                                     var next = currentImageLinkItem.parent().next();
-                                    var nextImg =null;
+                                    var nextImg = null;
                                     if (next.length != 0) {
-                                       nextImg = next.find(".fb-photo-thumb-link");
+                                        nextImg = next.find(".fb-photo-thumb-link");
                                         previewImage.attr("src", nextImg.attr("href"));
                                     }
                                     else {
@@ -381,7 +383,7 @@
                                         previewImage.attr("src", nextImg.attr("href"));
                                     }
                                     previewText.hide();
-                                    previewText.text(nextImg.text());
+                                    previewText.html(parseLinks(nextImg.text()));
                                 }
                                 return false;
                             });
@@ -394,6 +396,12 @@
                     }
                 }
                 );
+            }
+
+            function parseLinks(str) {
+                var regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/ig
+                var result = str.replace(regex, "<a href='$1' target='_blank'>$1</a>");
+                return result;
             }
 
             function getParameterByName(name, url) {
