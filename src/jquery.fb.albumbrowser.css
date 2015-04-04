@@ -80,6 +80,7 @@ div.fb-album-title
     background-color: rgba(59,89,152,1);
     position: relative;
     top:3px;
+    margin-top:3px;
     padding: 5px;
     display: none;
 }
