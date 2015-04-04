@@ -39,7 +39,7 @@ li.fb-album, li.fb-photo
     overflow: hidden;
     padding: 0px;
     background-color: #f7f7f7;
-    margin-top: -3px;
+    margin-top: 0px;
     margin-bottom: 3px;
     margin-right: 3px;
     background-image: url('loader.gif');
