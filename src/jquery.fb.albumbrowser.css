@@ -39,14 +39,15 @@ li.fb-album, li.fb-photo
     overflow: hidden;
     padding: 0px;
     background-color: #f7f7f7;
-    margin-top: -4px;
+    /*margin-top: -4px;
     margin-bottom: 3px;
-    margin-right: 3px;
+    margin-right: 3px;*/
     background-image: url('loader.gif');
     background-position: center center;
     background-repeat: no-repeat;
     cursor: pointer;
-    /*border:2px solid #fff;*/
+    border:1px solid #fff;
+	border-bottom-style:none;
 }
 li.fb-photo:hover{
     /*border:2px solid rgba(59,89,152,1);*/
