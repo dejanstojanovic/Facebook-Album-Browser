@@ -188,3 +188,8 @@ img.fb-albums-list {
     .fb-preview-text a {
         color: rgba(59, 89, 152, 1);
     }
+
+
+    .fb-preview-content{
+         margin-top:30px;
+    }
