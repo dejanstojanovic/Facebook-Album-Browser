@@ -286,8 +286,8 @@
                 var overlay = $(".fb-preview-overlay");
                 if (overlay.length == 0) {
                     overlay = $("<div>", { class: "fb-preview-overlay" });
-                    overlay.append($("<img>", { class: "fb-preview-img-prev", src: "src/prev-icon.png" }));
                     overlay.append($("<img>", { class: "fb-preview-img" }));
+                    overlay.append($("<img>", { class: "fb-preview-img-prev", src: "src/prev-icon.png" }));
                     overlay.append($("<img>", { class: "fb-preview-img-next", src: "src/next-icon.png" }));
                     if (settings.showImageText) {
                         overlay.append($("<span>", { class: "fb-preview-text" }));
@@ -339,7 +339,7 @@
                             previewText.width($(this).width() - 12);
                             $(this).attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
                             $(this).show();
-                            overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
+                            //overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
                             var prevImg = overlay.find("img.fb-preview-img-prev");
                             prevImg.show();
                             prevImg.unbind("click");

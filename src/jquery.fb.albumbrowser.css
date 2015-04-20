@@ -151,6 +151,7 @@ img.fb-albums-list
 .fb-preview-img, .fb-preview-img-prev, .fb-preview-img-next
 {
     display: inline-block;
+    /*display:block;*/
     vertical-align: middle;
 }
 
@@ -158,16 +159,21 @@ img.fb-albums-list
 {
     cursor: pointer;
     display:none;
+    margin-top:auto;
+    position: absolute;
+    top: 50%;
 }
 
 .fb-preview-img-prev
 {
-    margin-right: 10px;
+    left:0;
+    float:left;
 }
 
 .fb-preview-img-next
 {
-    margin-left: 10px;
+    right:0;
+    float:right;
 }
 .fb-photo-text{
     display:none;
