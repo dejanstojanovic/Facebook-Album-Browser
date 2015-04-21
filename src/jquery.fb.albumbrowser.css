@@ -182,7 +182,7 @@ img.fb-albums-list {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: left;
     padding: 6px;
-    display: none;
+    display: block;
 }
 
     .fb-preview-text a {

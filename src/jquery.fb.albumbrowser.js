@@ -306,6 +306,8 @@
                         $(this).parent().find("img.fb-preview-img-next").click();
                         return false;
                     });
+
+                    //INIT FB CODE HERE
                 }
                 else {
                     overlay = $(".fb-preview-overlay");
@@ -314,8 +316,13 @@
 
                 $(photoLink).unbind("click");
                 $(photoLink).click(function (event) {
+
+                    //alert($(this).attr("data-fb-page"));
+
                     var previewText = $(".fb-preview-text");
-                    previewText.hide();
+                    var previewContent = $(".fb-preview-content");
+                    //previewText.hide();
+                    previewContent.hide();
 
                     previewText.html(parseLinks($(this).find(".fb-photo-text").text()));
 
@@ -338,12 +345,14 @@
                             $(previewImage).show();
                         }
                         previewImage.load(function () {
+                            previewContent.css("display", "block");
                             if (previewText.text().trim() != "") {
                                 previewText.css("display", "block");
                             }
-                            //previewText.width($(this).width() - 12);
+                            else {
+                                previewText.hide();
+                            }
                             previewText.css("maxWidth",$(this).width() - 12);
-                            //$(this).attr("style", "margin-top:" + (overlay.height() - $(this).height()) / 2 + "px;");
                             $(this).show();
                             var prevImg = overlay.find("img.fb-preview-img-prev");
                             prevImg.show();
@@ -363,7 +372,10 @@
                                         prevImg = currentImageLinkItem.parent().parent().find("li").last().find(".fb-photo-thumb-link");
                                         previewImage.attr("src", prevImg.attr("href"));
                                     }
-                                    previewText.hide();
+
+                                    //alert(prevImg.attr("data-fb-page"));
+                                    //previewText.hide();
+                                    previewContent.hide();
                                     previewText.html(parseLinks(prevImg.text()));
                                 }
                                 return false;
@@ -387,7 +399,11 @@
                                         nextImg = currentImageLinkItem.parent().parent().find("li").first().find(".fb-photo-thumb-link");
                                         previewImage.attr("src", nextImg.attr("href"));
                                     }
-                                    previewText.hide();
+
+                                    //alert(nextImg.attr("data-fb-page"));
+
+                                    //previewText.hide();
+                                    previewContent.hide();
                                     previewText.html(parseLinks(nextImg.text()));
                                 }
                                 return false;
