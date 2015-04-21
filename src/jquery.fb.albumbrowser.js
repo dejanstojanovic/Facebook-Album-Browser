@@ -14,6 +14,7 @@
             photoChecked: null,
             photoUnchecked: null,
             showImageText: false,
+			likeButton:true,
             checkedPhotos: []
         }
 
@@ -174,7 +175,7 @@
                                     albumImg = $(result.data)[a].images[i];
                                 }
                             }
-                            var photoLink = $("<a>", { class: "fb-photo-thumb-link", href: $(result.data)[a].source });
+                            var photoLink = $("<a>", { class: "fb-photo-thumb-link", href: $(result.data)[a].source, "data-fb-page": $(result.data)[a].link });
                             var marginWidth = 0;
 
                             if (prefWidth > 0) {
