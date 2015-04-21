@@ -193,3 +193,7 @@ img.fb-albums-list {
     .fb-preview-content{
          margin-top:30px;
     }
+    .fb-like-container{
+        display:block;
+        float:right;
+    }

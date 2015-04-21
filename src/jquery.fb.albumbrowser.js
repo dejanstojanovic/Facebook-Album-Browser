@@ -286,7 +286,7 @@
             function addLikeButton(container, url) {
                 if (settings.likeButton) {
                     var likeBtn = $("<div>", { "data-show-faces": "false", class: "fb-like", "data-href": url, "data-action": "like", "data-layout": "box_count", "data-share": "false", "data-show-faces": "false" });
-                    var likeBtnContainer = $("<div>", { id: "fb-like-container" });
+                    var likeBtnContainer = $("<div>", { class: "fb-like-container" });
                     likeBtnContainer.append(likeBtn);
                     container.append(likeBtnContainer);
                     FB.XFBML.parse();
