@@ -14,7 +14,7 @@
             photoChecked: null,
             photoUnchecked: null,
             showImageText: false,
-			likeButton:true,
+            likeButton: true,
             checkedPhotos: []
         }
 
@@ -283,6 +283,16 @@
                 });
             }
 
+            function addLikeButton(container, url) {
+                if (settings.likeButton) {
+                    var likeBtn = $("<div>", { "data-show-faces": "false", class: "fb-like", "data-href": url, "data-action": "like", "data-layout": "box_count", "data-share": "false", "data-show-faces": "false" });
+                    var likeBtnContainer = $("<div>", { id: "fb-like-container" });
+                    likeBtnContainer.append(likeBtn);
+                    container.append(likeBtnContainer);
+                    FB.XFBML.parse();
+                }
+            }
+
             function initLightboxes(photoLink) {
                 var overlay = $(".fb-preview-overlay");
                 if (overlay.length == 0) {
@@ -296,7 +306,7 @@
                     }
                     overlay.append($("<img>", { class: "fb-preview-img-prev", src: "src/prev-icon.png" }));
                     overlay.append($("<img>", { class: "fb-preview-img-next", src: "src/next-icon.png" }));
-                    
+
                     $("body").append(overlay);
                     overlay = $(".fb-preview-overlay");
                     $(overlay).click(function () {
@@ -307,7 +317,17 @@
                         return false;
                     });
 
-                    //INIT FB CODE HERE
+                    if (settings.likeButton) {
+                        $("body").append("<div>", { id: "fb-root" });
+
+                        (function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s); js.id = id;
+                            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=775908159169504";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+                    }
                 }
                 else {
                     overlay = $(".fb-preview-overlay");
@@ -316,15 +336,13 @@
 
                 $(photoLink).unbind("click");
                 $(photoLink).click(function (event) {
-
-                    //alert($(this).attr("data-fb-page"));
-
                     var previewText = $(".fb-preview-text");
                     var previewContent = $(".fb-preview-content");
-                    //previewText.hide();
                     previewContent.hide();
 
                     previewText.html(parseLinks($(this).find(".fb-photo-text").text()));
+
+                    addLikeButton(previewText, $(this).attr("data-fb-page"));
 
                     var eventObj = {
                         id: $(this).find("img.fb-photo-thumb").attr("data-id"),
@@ -352,7 +370,7 @@
                             else {
                                 previewText.hide();
                             }
-                            previewText.css("maxWidth",$(this).width() - 12);
+                            previewText.css("maxWidth", $(this).width() - 12);
                             $(this).show();
                             var prevImg = overlay.find("img.fb-preview-img-prev");
                             prevImg.show();
@@ -377,6 +395,8 @@
                                     //previewText.hide();
                                     previewContent.hide();
                                     previewText.html(parseLinks(prevImg.text()));
+
+                                    addLikeButton(previewText, prevImg.attr("data-fb-page"));
                                 }
                                 return false;
                             });
@@ -405,6 +425,8 @@
                                     //previewText.hide();
                                     previewContent.hide();
                                     previewText.html(parseLinks(nextImg.text()));
+
+                                    addLikeButton(previewText, nextImg.attr("data-fb-page"));
                                 }
                                 return false;
                             });
