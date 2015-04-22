@@ -38,6 +38,7 @@ The following are options for the plugin which are used to congigure the plugin 
 * **skipAlbums** - List of IDs or names or combined IDs and names of albums which will not be browsed (e.g ["Profile Pictures", "Timeline Photos"]). Default value is _[]_
 * **lightbox** - Show full size image in a lightbox style when clicked. Default value is _true_
 * **photosCheckbox** - Allows using of plugin as an image multipicker. Default value is _true_
+* **likeButton** - Add facebook like button for image on image lightbox preview
 
 ###Events
 The following are events raised by plugin:
