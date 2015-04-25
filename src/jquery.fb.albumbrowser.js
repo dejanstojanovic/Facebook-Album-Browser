@@ -25,6 +25,8 @@
             photoUnchecked: null,
             showImageText: false,
             likeButton: true,
+            albumsPageSize: 0,
+            photosPageSize: 0,
             checkedPhotos: []
         }
 
