@@ -208,3 +208,6 @@ img.fb-albums-list {
         text-align:center;
         cursor:pointer;
     }
+    .fb-albums-more{
+        display:none;
+    }
