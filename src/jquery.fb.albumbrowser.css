@@ -197,3 +197,14 @@ img.fb-albums-list {
         display:block;
         float:right;
     }
+
+    .fb-btn-more{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight:bold;
+        display:block;
+        color:#fff;
+        background:rgba(59, 89, 152, 1);
+        padding:12px;
+        text-align:center;
+        cursor:pointer;
+    }
