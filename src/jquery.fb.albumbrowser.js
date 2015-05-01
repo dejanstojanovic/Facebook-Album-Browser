@@ -26,7 +26,9 @@
             showImageText: false,
             likeButton: false,
             albumsPageSize: 8,
-            photosPageSize: 0,
+            albumsMoreButtonText: "more albums...",
+            photosPageSize: 5,
+            photosMoreButtonText: "more photos...",
             checkedPhotos: []
         }
 
@@ -60,7 +62,7 @@
                             if (settings.albumsPageSize > 0) {
                                 var moreButton = $(container).find(".fb-btn-more");
                                 if (moreButton.length == 0) {
-                                    moreButton = $("<div>", { class: "fb-btn-more fb-albums-more", text: "more" });
+                                    moreButton = $("<div>", { class: "fb-btn-more fb-albums-more", text: settings.albumsMoreButtonText });
                                     $(container).append(moreButton);
                                     $(moreButton).click(function () {
                                         var _this = $(this);
@@ -139,7 +141,7 @@
                                     $(albumList).append(albumListItem);
 
 
-                                    if (settings.albumsPageSize>0 && $(albumList).find("li").index(albumListItem) >= settings.albumsPageSize) {
+                                    if (settings.albumsPageSize > 0 && $(albumList).find("li").index(albumListItem) >= settings.albumsPageSize) {
                                         albumListItem.hide();
                                         $(container).find(".fb-albums-more").fadeIn();
                                     }
@@ -160,7 +162,7 @@
                                         previewContainer.find("img.fb-albums-list,h3.fb-album-heading").click(function () {
                                             previewContainer.fadeOut(function () {
                                                 $(selector).find(".fb-albums").fadeIn(function () {
-                                                    if(settings.albumsPageSize>0 && $(selector).find("li.fb-album:hidden").length>0){
+                                                    if (settings.albumsPageSize > 0 && $(selector).find("li.fb-album:hidden").length > 0) {
                                                         $(selector).find("div.fb-albums-more").show();
                                                     }
                                                 });
@@ -212,81 +214,116 @@
                     cache: false,
                     dataType: 'jsonp',
                     success: function (result) {
-                        for (a = 0; a < result.data.length; a++) {
-                            var photoListItem = $("<li>", { class: "fb-photo" });
-                            var prefWidth = photoListItem.width();
-                            var prefHeight = photoListItem.height();
-                            var albumImg = $(result.data)[a].images[0];
-                            for (i = 0; i < $(result.data)[a].images.length; i++) {
-                                if (
-                                        ($(result.data)[a].images[i].height >= prefHeight && $(result.data)[a].images[i].width >= prefWidth) &&
-                                        ($(result.data)[a].images[i].height <= albumImg.height && $(result.data)[a].images[i].width <= albumImg.width)
-                                    ) {
-                                    albumImg = $(result.data)[a].images[i];
+
+                        if (result.data.length > 0) {
+
+                            if (settings.photosPageSize > 0) {
+                                var moreButton = $(container).parent().find(".fb-btn-more");
+                                if (moreButton.length == 0) {
+                                    moreButton = $("<div>", { class: "fb-btn-more fb-photos-more", text: settings.photosMoreButtonText });
+                                    $(container).parent().append(moreButton);
+                                    $(moreButton).click(function () {
+                                        var _this = $(this);
+                                        $(container).find("li.fb-photo:hidden").slice(0, settings.photosPageSize).fadeIn(function () {
+                                            if ($(container).find("li.fb-photo:hidden").length == 0) {
+                                                _this.fadeOut(function () {
+                                                    _this.remove();
+                                                });
+                                            }
+                                        });
+                                    });
                                 }
                             }
-                            var photoLink = $("<a>", { class: "fb-photo-thumb-link", href: $(result.data)[a].source, "data-fb-page": $(result.data)[a].link });
-                            var marginWidth = 0;
 
-                            if (prefWidth > 0) {
-                                marginWidth = (prefWidth - albumImg.width) / 2;
-                            }
 
-                            if (settings.photosCheckbox) {
-                                var imageCheck = $("<div>", { class: "image-check" });
-                                imageCheck.click(function () {
-                                    var eventObj = {
-                                        id: $(this).parent().find("img.fb-photo-thumb").attr("data-id"),
-                                        url: $(this).parent().find("a").attr("href"),
-                                        thumb: $(this).parent().find("img.fb-photo-thumb").attr("src")
-                                    };
-                                    $(this).toggleClass("checked");
-                                    if ($(this).hasClass("checked")) {
-                                        if (settings.photoChecked != null && typeof (settings.photoChecked) == "function") {
-                                            settings.checkedPhotos.push(eventObj);
-                                            settings.photoChecked(eventObj);
-                                        }
+                            for (a = 0; a < result.data.length; a++) {
+                                var photoListItem = $("<li>", { class: "fb-photo" });
+                                var prefWidth = photoListItem.width();
+                                var prefHeight = photoListItem.height();
+                                var albumImg = $(result.data)[a].images[0];
+                                for (i = 0; i < $(result.data)[a].images.length; i++) {
+                                    if (
+                                            ($(result.data)[a].images[i].height >= prefHeight && $(result.data)[a].images[i].width >= prefWidth) &&
+                                            ($(result.data)[a].images[i].height <= albumImg.height && $(result.data)[a].images[i].width <= albumImg.width)
+                                        ) {
+                                        albumImg = $(result.data)[a].images[i];
                                     }
-                                    else {
-                                        if (settings.photoUnchecked != null && typeof (settings.photoUnchecked) == "function") {
-                                            for (i = 0; i < settings.checkedPhotos.length; i++) {
-                                                if (settings.checkedPhotos[i].id == eventObj.id) {
-                                                    settings.checkedPhotos.splice(i, 1);
-                                                    settings.photoUnchecked(eventObj);
-                                                    break;
+                                }
+                                var photoLink = $("<a>", { class: "fb-photo-thumb-link", href: $(result.data)[a].source, "data-fb-page": $(result.data)[a].link });
+                                var marginWidth = 0;
+
+                                if (prefWidth > 0) {
+                                    marginWidth = (prefWidth - albumImg.width) / 2;
+                                }
+
+                                if (settings.photosCheckbox) {
+                                    var imageCheck = $("<div>", { class: "image-check" });
+                                    imageCheck.click(function () {
+                                        var eventObj = {
+                                            id: $(this).parent().find("img.fb-photo-thumb").attr("data-id"),
+                                            url: $(this).parent().find("a").attr("href"),
+                                            thumb: $(this).parent().find("img.fb-photo-thumb").attr("src")
+                                        };
+                                        $(this).toggleClass("checked");
+                                        if ($(this).hasClass("checked")) {
+                                            if (settings.photoChecked != null && typeof (settings.photoChecked) == "function") {
+                                                settings.checkedPhotos.push(eventObj);
+                                                settings.photoChecked(eventObj);
+                                            }
+                                        }
+                                        else {
+                                            if (settings.photoUnchecked != null && typeof (settings.photoUnchecked) == "function") {
+                                                for (i = 0; i < settings.checkedPhotos.length; i++) {
+                                                    if (settings.checkedPhotos[i].id == eventObj.id) {
+                                                        settings.checkedPhotos.splice(i, 1);
+                                                        settings.photoUnchecked(eventObj);
+                                                        break;
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                    return false;
-                                });
-                            }
-                            var photoThumb = $("<img>", { style: "margin-left:" + marginWidth + "px;display:none;", "data-id": $(result.data).get(a).id, class: "fb-photo-thumb", "data-src": albumImg.source, src: "" });
-                            var photoText = $("<span>", { class: "fb-photo-text" });
-                            photoText.text($(result.data).get(a).name);
-                            photoLink.append(photoText);
+                                        return false;
+                                    });
+                                }
+                                var photoThumb = $("<img>", { style: "margin-left:" + marginWidth + "px;display:none;", "data-id": $(result.data).get(a).id, class: "fb-photo-thumb", "data-src": albumImg.source, src: "" });
+                                var photoText = $("<span>", { class: "fb-photo-text" });
+                                photoText.text($(result.data).get(a).name);
+                                photoLink.append(photoText);
 
-                            photoLink.append(photoThumb);
-                            if (settings.photosCheckbox) {
-                                photoListItem.append(imageCheck);
-                                for (i = 0; i < settings.checkedPhotos.length; i++) {
-                                    if (settings.checkedPhotos[i].id == $(result.data).get(a).id) {
-                                        imageCheck.addClass("checked");
-                                        break;
+                                photoLink.append(photoThumb);
+                                if (settings.photosCheckbox) {
+                                    photoListItem.append(imageCheck);
+                                    for (i = 0; i < settings.checkedPhotos.length; i++) {
+                                        if (settings.checkedPhotos[i].id == $(result.data).get(a).id) {
+                                            imageCheck.addClass("checked");
+                                            break;
+                                        }
                                     }
                                 }
+                                photoListItem.append(photoLink);
+
+                                container.append(photoListItem);
+                                if (settings.photosPageSize > 0 && $(container).find("li").index(photoListItem) >= settings.photosPageSize) {
+                                    photoListItem.hide();
+                                    $(container).find(".fb-photos-more").fadeIn();
+                                }
+
+                                $(photoThumb).load(function () {
+                                    $(this).fadeIn(300);
+                                });
+                                loadIfVisible(photoThumb);
+                                initLightboxes(container.find("a.fb-photo-thumb-link"));
                             }
-                            photoListItem.append(photoLink);
-                            container.append(photoListItem);
-                            $(photoThumb).load(function () {
-                                $(this).fadeIn(300);
-                            });
-                            loadIfVisible(photoThumb);
-                            initLightboxes(container.find("a.fb-photo-thumb-link"));
+
+                            if (result.paging && result.paging.next && result.paging.next != "") {
+                                loadPhotos(result.paging.next, container);
+                            }
+
+
+
+
                         }
-                        if (result.paging && result.paging.next && result.paging.next != "") {
-                            loadPhotos(result.paging.next, container);
-                        }
+
                     }
                 });
             }
