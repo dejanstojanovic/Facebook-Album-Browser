@@ -25,9 +25,9 @@
             photoUnchecked: null,
             showImageText: false,
             likeButton: false,
-            albumsPageSize: 8,
+            albumsPageSize: 0,
             albumsMoreButtonText: "more albums...",
-            photosPageSize: 5,
+            photosPageSize: 0,
             photosMoreButtonText: "more photos...",
             checkedPhotos: []
         }
