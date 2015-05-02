@@ -39,6 +39,10 @@ The following are options for the plugin which are used to congigure the plugin 
 * **lightbox** - Show full size image in a lightbox style when clicked. Default value is _true_
 * **photosCheckbox** - Allows using of plugin as an image multipicker. Default value is _true_
 * **likeButton** - Add facebook like button for image on image lightbox preview. Default value if _true_
+* **albumsPageSize** - Page size of album browsing. If set to 0, paging is off. Default value if _0_
+* **albumsMoreButtonText** - Text value for more button when album paging is on. Default value if _"more albums..."_
+* **photosPageSize** - Page size of album photo browsing. If set to 0, paging is off. Default value if _0_
+* **photosMoreButtonText** - Text value for more button when photos paging is on. Default value if _"more photos..."_
 
 ###Events
 The following are events raised by plugin:
