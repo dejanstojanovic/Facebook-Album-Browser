@@ -24,7 +24,8 @@
             photoChecked: null,
             photoUnchecked: null,
             showImageText: false,
-            likeButton: false,
+            likeButton: true,
+            shareButton:true,
             albumsPageSize: 0,
             albumsMoreButtonText: "more albums...",
             photosPageSize: 0,
@@ -372,7 +373,7 @@
 
             function addLikeButton(container, url) {
                 if (settings.likeButton) {
-                    var likeBtn = $("<div>", { "data-show-faces": "false", class: "fb-like", "data-href": url, "data-action": "like", "data-layout": "box_count", "data-share": "false", "data-show-faces": "false" });
+                    var likeBtn = $("<div>", { "data-show-faces": "false", class: "fb-like", "data-href": url, "data-action": "like", "data-layout": "box_count", "data-share": settings.shareButton, "data-show-faces": "false" });
                     var likeBtnContainer = $("<div>", { class: "fb-like-container" });
                     likeBtnContainer.append(likeBtn);
                     container.prepend(likeBtnContainer);
