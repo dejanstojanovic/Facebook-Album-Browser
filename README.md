@@ -30,7 +30,7 @@ Simply add a container (div or any other element) and apply the plugin to it.
 ###What are options for plugin
 The following are options for the plugin which are used to congigure the plugin instance:
 * **account** - Facebook account for which albums and photos will be fetched and displayed. This parameter is mandatory and must be provided in order for plugin to work.
-* **acessToken** - Access token for accessing non public content for the facebook account.
+* **accessToken** - Access token for accessing non public content for the facebook account.
 * **showAccountInfo** - Show Facebook account name and icon abowe the browser. Default value is _true_
 * **showImageCount** - Show number of protos in each album. Default value is _true_
 * **showImageText** - Show or hide text associated to photo in image preview (lightbox). Default value is _false_
