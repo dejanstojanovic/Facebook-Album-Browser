@@ -158,3 +158,12 @@ In order to make this plugin work with Facebook account photos you need to allow
 Please read the article on Facebook https://developers.facebook.com/docs/apps/review.
 
 For testing purposes you can use Facebook App test users. More about using test users you can find at https://developers.facebook.com/docs/apps/test-users/.
+
+###Small request
+So far I developed and mainatined this plugin by myself, so sometime I might not have time to respond to your requests and reported bugs. Feel free to participate. Every line of code, every comment or idea would mean a lot to maintain this free plugin project alive and up to date.
+
+It would mean a lot to me to know where it is used, to see how it works and maybe give me an idea what can be improved in order to better fit in to various websites.
+
+I created an [issue](https://github.com/dejanstojanovic/Facebook-Album-Browser/issues/13) where you can add all your website URL/URLs where you are using this webiste.
+
+Thank you all in advance.
