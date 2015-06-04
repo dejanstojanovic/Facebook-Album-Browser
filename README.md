@@ -98,8 +98,11 @@ To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit
 This plugin has buit in support for multiple picker, wich allows you to browse through albums and photos and pick them. The plugin will store all picked photos in an object array and make them available.
 
 You can either access picked images on your custom page event or you can hook to plugin's photoChecked and photoUnchecked event.
-```
-$(document).ready(function () {
+```html
+  <div class="fb-album-container">
+  </div>
+  <script type="text/javascript">
+        $(document).ready(function () {
           $(".fb-album-container").FacebookAlbumBrowser({
                 account: "natgeo",
                 accessToken: "775908159169504|cYEIsh0rs25OQQC8Ex2hXyCOut4",
@@ -125,6 +128,7 @@ $(document).ready(function () {
                 }
             });
         });
+  </script>
 ```
 
 
