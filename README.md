@@ -94,6 +94,13 @@ To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit
 
 ![ScreenShot](http://dejanstojanovic.net/media/31657/faceboo-phptp-preview.png)
 
+###Using it as a photo-picker
+This plugin has buit in support for multiple picker, wich allows you to browse through albums and photos and pick them. The plugin will store all picked photos in an object array and make them available.
+
+You can either access picked images on your custom page event or you can hook to plugin's photoChecked and photoUnchecked event.
+
+![ScreenShot](http://dejanstojanovic.net/media/31674/fb-photo-picker.png)
+
 ###Facebook access tokens (by [@rockyr1](https://github.com/rockyr1))
 Facebook always keeps changing the way data can be accessed through their APIs, recent one has been to have an AccessToken to access any Facebook data. Every time Facebook does this, there are plenty of plugins, widgets and certain features within a website which break. That's why its always important to understand the external dependencies and also to have a dedicated Web Admin to manage changes like this on your website.
 
