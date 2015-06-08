@@ -159,7 +159,7 @@ Please read the article on Facebook https://developers.facebook.com/docs/apps/re
 
 For testing purposes you can use Facebook App test users. More about using test users you can find at https://developers.facebook.com/docs/apps/test-users/.
 
-###Small request
+###A word of author
 So far I developed and mainatined this plugin by myself, so sometime I might not have time to respond to your requests and reported bugs. Feel free to participate. Every line of code, every comment or idea would mean a lot to maintain this free plugin project alive and up to date.
 
 It would mean a lot to me to know where it is used, to see how it works and maybe give me an idea what can be improved in order to better fit in to various websites.
