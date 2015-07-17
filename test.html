@@ -13,11 +13,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
           $(".fb-album-container").FacebookAlbumBrowser({
-              account: "natgeo",
+                account: "natgeo",
+                accessToken: "775908159169504|cYEIsh0rs25OQQC8Ex2hXyCOut4",
                 skipAlbums: ["Profile Pictures", "Timeline Photos"],
+                onlyAlbum: "10150471218778951",
                 showAccountInfo: true,
                 showImageCount: true,
-                showImageText:true,
+                showImageText: true,
+                shareButton: false,
                 lightbox: true,
                 photosCheckbox: true,
                 photoChecked: function(photo){
