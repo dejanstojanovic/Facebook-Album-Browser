@@ -1,7 +1,7 @@
 ﻿/*
  * jQuery Plugin: jQuery Facebook Album Browser
  * https://github.com/dejanstojanovic/Facebook-Album-Browser
- * Version 1.0.0
+ * Version 1.1.2
  *
  * Copyright (c) 2015 Dejan Stojanovic (http://dejanstojanovic.net)
  *
@@ -17,6 +17,7 @@
             showImageCount: true,
             skipEmptyAlbums: true,
             skipAlbums: [],
+            onlyAlbum: null,
             lightbox: true,
             photosCheckbox: true,
             albumSelected: null,
@@ -25,7 +26,7 @@
             photoUnchecked: null,
             showImageText: false,
             likeButton: true,
-            shareButton:true,
+            shareButton: true,
             albumsPageSize: 0,
             albumsMoreButtonText: "more albums...",
             photosPageSize: 0,
@@ -45,12 +46,25 @@
                 class: "fb-albums"
             }));
             var albumList = $(container).find(".fb-albums");
-            var invokeUrl = "https://graph.facebook.com/" + settings.account + "/albums";
+            var invokeUrl = "";
+            if (settings.onlyAlbum != null) {
+                invokeUrl = "https://graph.facebook.com/" + settings.onlyAlbum + "/photos";
+            }
+            else {
+                invokeUrl = "https://graph.facebook.com/" + settings.account + "/albums";
+            }
             if (settings.accessToken != "") {
                 invokeUrl += "?access_token=" + settings.accessToken;
             }
 
-            loadAlbums(invokeUrl);
+            if (settings.onlyAlbum != null) {
+                loadPhotos(invokeUrl, $(container));
+
+            }
+            else {
+                loadAlbums(invokeUrl);
+            }
+
             function loadAlbums(url) {
                 $.ajax({
                     type: 'GET',
