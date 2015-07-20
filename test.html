@@ -16,13 +16,16 @@
                 account: "natgeo",
                 accessToken: "775908159169504|cYEIsh0rs25OQQC8Ex2hXyCOut4",
                 skipAlbums: ["Profile Pictures", "Timeline Photos"],
-                onlyAlbum: "10150471218778951",
+                onlyAlbum: "10150310813623951",
+                showComments: true,
                 showAccountInfo: true,
                 showImageCount: true,
                 showImageText: true,
                 shareButton: false,
                 lightbox: true,
                 photosCheckbox: true,
+                likeButton: false,
+                shareButton: false,
                 photoChecked: function(photo){
                     console.log("PHOTO CHECKED: " + photo.id + " - " + photo.url + " - " + photo.thumb);
                     console.log("CHECKED PHOTOS COUNT: " + this.checkedPhotos.length);

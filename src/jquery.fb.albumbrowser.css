@@ -143,7 +143,6 @@ img.fb-albums-list {
 
 .fb-preview-img, .fb-preview-img-prev, .fb-preview-img-next {
     display: inline-block;
-    /*display:block;*/
     vertical-align: middle;
 }
 
@@ -156,7 +155,7 @@ img.fb-albums-list {
     cursor: pointer;
     display: none;
     margin-top: auto;
-    position: absolute;
+    position: fixed;
     top: 50%;
 }
 
@@ -166,7 +165,7 @@ img.fb-albums-list {
 }
 
 .fb-preview-img-next {
-    right: 0;
+    right: 20px;
     float: right;
 }
 
@@ -174,7 +173,22 @@ img.fb-albums-list {
     display: none;
 }
 
-.fb-preview-text {
+.fb-comment-text{
+    display:inline-block;
+    margin-left: 10px;
+    vertical-align:top;
+    width:calc(100% - 60px);
+}
+
+.fb-comment-account{
+    display:inline-block;
+}
+.fb-comment-account{
+    text-decoration:none;
+    color:rgba(59, 89, 152, 1);
+}
+
+.fb-preview-text, .fb-comment {
     display: block;
     background-color: #e1e2e3;
     margin-left: auto;
@@ -184,6 +198,11 @@ img.fb-albums-list {
     text-align: left;
     padding: 6px;
     display: block;
+}
+.fb-comment{
+    background-color:#e9eaeb;
+    border-bottom:1px solid #e1e2e3;
+    width:calc(100% - 60px);
 }
 
     .fb-preview-text a {

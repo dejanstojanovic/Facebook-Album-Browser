@@ -16,6 +16,7 @@
             showAccountInfo: true,
             showImageCount: true,
             skipEmptyAlbums: true,
+            showComments: true,
             skipAlbums: [],
             onlyAlbum: null,
             lightbox: true,
@@ -343,6 +344,37 @@
                 });
             }
 
+            function loadComments(objectId, container) {
+                var url = "https://graph.facebook.com/" + objectId + "/comments?access_token=" + settings.accessToken;
+                $(container).find(".fb-comment").remove();
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    cache: false,
+                    dataType: 'jsonp',
+                    success: function (result) {
+                        if (result.data.length > 0) {
+                            for (c = 0; c < result.data.length; c++) {
+                                var accountIcon = "https://graph.facebook.com/" + $(result.data)[c].from.id + "/picture?type=square";
+                                var comment = $("<div/>", { "class": "fb-comment" });
+                                comment.css("maxWidth", container.find(".fb-preview-img").width() - 12);
+                                comment.append($("<img/>", { src: accountIcon, "class": "fb-comment-account" }));
+                                var commentText = $("<div/>", { "class": "fb-comment-text" });
+
+                                commentText.append($("<a/>", { "class": "fb-comment-account", target: "_blank", href: "http://facebook.com/" + $(result.data)[c].from.id, text: $(result.data)[c].from.name }));
+                                commentText.append($("<div/>", { text: $(result.data)[c].message }));
+                                comment.append(commentText);
+
+                                container.append(comment);
+                            }
+                            $(document).scrollTop();
+                        }
+
+                    }
+                });
+
+            }
+
             function loadIfVisible(photoThumb) {
                 var element = null;
                 if ($(photoThumb).hasClass("fb-photo-thumb")) {
@@ -460,11 +492,17 @@
                         var previewImage = overlay.find("img.fb-preview-img");
                         previewImage.hide();
                         overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").hide();
+                        previewImage.attr("data-id", $(this).attr("data-id"));
                         previewImage.attr("src", $(this).attr("href"));
 
                         if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
                             $(previewImage).show();
                         }
+
+                        if (settings.showComments) {
+                            loadComments($(this).find("img.fb-photo-thumb").attr("data-id"), $(previewImage).parent());
+                        }
+
                         previewImage.load(function () {
                             previewContent.css("display", "block");
                             if (previewText.text().trim() != "" || settings.likeBtn) {
@@ -474,7 +512,9 @@
                                 previewText.hide();
                             }
                             previewText.css("maxWidth", $(this).width() - 12);
+                            $(".fb-comment").css("maxWidth", $(this).width() - 12);
                             $(this).show();
+
                             var prevImg = overlay.find("img.fb-preview-img-prev");
                             prevImg.show();
                             prevImg.unbind("click");
