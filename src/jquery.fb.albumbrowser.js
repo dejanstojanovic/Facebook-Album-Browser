@@ -1,7 +1,7 @@
 ﻿/*
  * jQuery Plugin: jQuery Facebook Album Browser
  * https://github.com/dejanstojanovic/Facebook-Album-Browser
- * Version 1.1.2
+ * Version 1.2.2
  *
  * Copyright (c) 2015 Dejan Stojanovic (http://dejanstojanovic.net)
  *
@@ -17,6 +17,7 @@
             showImageCount: true,
             skipEmptyAlbums: true,
             showComments: true,
+            commentsLimit: 5,
             skipAlbums: [],
             onlyAlbum: null,
             lightbox: true,
@@ -344,16 +345,44 @@
                 });
             }
 
-            function loadComments(objectId, container) {
-                var url = "https://graph.facebook.com/" + objectId + "/comments?access_token=" + settings.accessToken;
-                $(container).find(".fb-comment").remove();
+            function loadComments(objectId, container, nextUrl) {
+                var url = "https://graph.facebook.com/" + objectId + "/comments?access_token=" + settings.accessToken + "&limit=" + settings.commentsLimit;
+                if (nextUrl != null) {
+                    url = nextUrl;
+                }
+                else {
+                    $(container).find(".fb-comment").remove();
+                    $(container).find(".fb-comment-more").remove();
+                }
+
                 $.ajax({
                     type: 'GET',
                     url: url,
                     cache: false,
                     dataType: 'jsonp',
                     success: function (result) {
+
                         if (result.data.length > 0) {
+                            if (result.paging.next != "") {
+                                var commentsMore = $(container).find(".fb-comment-more");
+                                if (commentsMore.length == 0) {
+                                    commentsMore = $("<div/>", { "class": "fb-comment-more", text: "more" });
+                                    $(container).append(commentsMore);
+                                }
+
+                                $(commentsMore).unbind("click");
+                                $(commentsMore).attr("data-next", result.paging.next);
+                                $(commentsMore).click(function () {
+                                    loadComments(objectId, container, $(this).attr("data-next"));
+                                    return false;
+                                });
+                            }
+                            else {
+                                $(container).find(".fb-comment-more").remove();
+                            }
+
+                            $(commentsMore).css("maxWidth", container.find(".fb-preview-img").width() - 12);
+
                             for (c = 0; c < result.data.length; c++) {
                                 var accountIcon = "https://graph.facebook.com/" + $(result.data)[c].from.id + "/picture?type=square";
                                 var comment = $("<div/>", { "class": "fb-comment" });
@@ -362,12 +391,15 @@
                                 var commentText = $("<div/>", { "class": "fb-comment-text" });
 
                                 commentText.append($("<a/>", { "class": "fb-comment-account", target: "_blank", href: "http://facebook.com/" + $(result.data)[c].from.id, text: $(result.data)[c].from.name }));
+                                commentText.append($("<div/>", { "class": "fb-comment-date", text: new Date($(result.data)[c].created_time).toLocaleString() }));
                                 commentText.append($("<div/>", { text: $(result.data)[c].message }));
                                 comment.append(commentText);
 
-                                container.append(comment);
+                                commentsMore.before(comment);
                             }
-                            $(document).scrollTop();
+                            if (nextUrl == null) {
+                                $(document).scrollTop();
+                            }
                         }
 
                     }
@@ -492,15 +524,11 @@
                         var previewImage = overlay.find("img.fb-preview-img");
                         previewImage.hide();
                         overlay.find("img.fb-preview-img-prev,img.fb-preview-img-next").hide();
-                        previewImage.attr("data-id", $(this).attr("data-id"));
+                        previewImage.attr("data-id", $(this).find("img.fb-photo-thumb").attr("data-id"));
                         previewImage.attr("src", $(this).attr("href"));
 
                         if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
                             $(previewImage).show();
-                        }
-
-                        if (settings.showComments) {
-                            loadComments($(this).find("img.fb-photo-thumb").attr("data-id"), $(previewImage).parent());
                         }
 
                         previewImage.load(function () {
@@ -512,8 +540,13 @@
                                 previewText.hide();
                             }
                             previewText.css("maxWidth", $(this).width() - 12);
-                            $(".fb-comment").css("maxWidth", $(this).width() - 12);
+                            $(".fb-comment,.fb-comment-more").css("maxWidth", $(this).width() - 12);
                             $(this).show();
+
+
+                            if (settings.showComments) {
+                                loadComments($(this).attr("data-id"), $(this).parent(), null);
+                            }
 
                             var prevImg = overlay.find("img.fb-preview-img-prev");
                             prevImg.show();
@@ -527,10 +560,12 @@
                                     var prevImg = null;
                                     if (prev.length != 0) {
                                         prevImg = prev.find(".fb-photo-thumb-link");
+                                        previewImage.attr("data-id", prevImg.find("img.fb-photo-thumb").attr("data-id"));
                                         previewImage.attr("src", prevImg.attr("href"));
                                     }
                                     else {
                                         prevImg = currentImageLinkItem.parent().parent().find("li").last().find(".fb-photo-thumb-link");
+                                        previewImage.attr("data-id", prevImg.find("img.fb-photo-thumb").attr("data-id"));
                                         previewImage.attr("src", prevImg.attr("href"));
                                     }
                                     previewContent.hide();
@@ -555,10 +590,12 @@
                                     var nextImg = null;
                                     if (next.length != 0) {
                                         nextImg = next.find(".fb-photo-thumb-link");
+                                        previewImage.attr("data-id", nextImg.find("img.fb-photo-thumb").attr("data-id"));
                                         previewImage.attr("src", nextImg.attr("href"));
                                     }
                                     else {
                                         nextImg = currentImageLinkItem.parent().parent().find("li").first().find(".fb-photo-thumb-link");
+                                        previewImage.attr("data-id", nextImg.find("img.fb-photo-thumb").attr("data-id"));
                                         previewImage.attr("src", nextImg.attr("href"));
                                     }
                                     previewContent.hide();
