@@ -219,7 +219,10 @@ img.fb-albums-list {
     padding: 6px;
     display: block;
 }
-
+.fb-preview-text{
+	display:table;
+	clear:both;
+}
 .fb-comment {
     background-color: #e9eaeb;
     border-bottom: 1px solid #e1e2e3;

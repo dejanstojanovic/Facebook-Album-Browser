@@ -468,7 +468,7 @@
                     overlay.append(lightboxContent);
                     lightboxContent.append($("<img>", { class: "fb-preview-img" }));
                     if (settings.showImageText || settings.likeButton) {
-                        lightboxContent.append($("<span>", { class: "fb-preview-text" }));
+                        lightboxContent.append($("<div>", { class: "fb-preview-text" }));
                     }
                     overlay.append($("<img>", { class: "fb-preview-img-prev", src: "src/prev-icon.png" }));
                     overlay.append($("<img>", { class: "fb-preview-img-next", src: "src/next-icon.png" }));
@@ -539,7 +539,7 @@
                             else {
                                 previewText.hide();
                             }
-                            previewText.css("maxWidth", $(this).width() - 12);
+                            previewText.css("maxWidth", $(this).width());
                             $(".fb-comment,.fb-comment-more").css("maxWidth", $(this).width() - 12);
                             $(this).show();
 
