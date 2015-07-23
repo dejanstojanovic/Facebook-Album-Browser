@@ -199,8 +199,13 @@ img.fb-albums-list {
     font-size: 12px;
 }
 
-.fb-comment-account {
+img.fb-comment-account {
     display: inline-block;
+	width:50px;
+	height:50px;
+	background-image:url('loader.gif');
+	background-position:center center;
+	background-repeat:no-repeat;
 }
 
 .fb-comment-account {

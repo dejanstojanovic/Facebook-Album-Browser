@@ -1,7 +1,7 @@
 ﻿/*
  * jQuery Plugin: jQuery Facebook Album Browser
  * https://github.com/dejanstojanovic/Facebook-Album-Browser
- * Version 1.2.2
+ * Version 1.2.3
  *
  * Copyright (c) 2015 Dejan Stojanovic (http://dejanstojanovic.net)
  *
@@ -400,6 +400,11 @@
                             if (nextUrl == null) {
                                 $(document).scrollTop();
                             }
+							else{
+								$(".fb-preview-overlay").animate({
+									scrollTop: $(container).find(".fb-comment").last().offset().top
+								}, 1000);
+							}
                         }
 
                     }
