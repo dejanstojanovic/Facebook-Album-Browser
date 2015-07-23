@@ -43,6 +43,9 @@ The following are options for the plugin which are used to congigure the plugin 
 * **albumsMoreButtonText** - Text value for more button when album paging is on. Default value if _"more albums..."_
 * **photosPageSize** - Page size of album photo browsing. If set to 0, paging is off. Default value if _0_
 * **photosMoreButtonText** - Text value for more button when photos paging is on. Default value if _"more photos..."_
+* **onlyAlbum** - Skips album browsing and starts browsing album with specific id. Default value is _"null"_
+* **showComments** - Shows comments of the photo pwhen previewing photo. Default value is _"false"_
+* **commentsLimit** - Number of comments per page. Default value is _"5"_
 
 ###Events
 The following are events raised by plugin:
