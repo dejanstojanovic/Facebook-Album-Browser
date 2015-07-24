@@ -22,10 +22,12 @@
                 showImageCount: true,
                 showImageText: true,
                 shareButton: false,
+                albumsPageSize: 0,
+                photosPageSize: 0,
                 lightbox: true,
                 photosCheckbox: true,
-                likeButton: false,
-                shareButton: false,
+                likeButton: true,
+                shareButton: true,
                 photoChecked: function(photo){
                     console.log("PHOTO CHECKED: " + photo.id + " - " + photo.url + " - " + photo.thumb);
                     console.log("CHECKED PHOTOS COUNT: " + this.checkedPhotos.length);

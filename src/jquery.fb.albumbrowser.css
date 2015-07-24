@@ -213,7 +213,7 @@ img.fb-comment-account {
     color: rgba(59, 89, 152, 1);
 }
 
-.fb-preview-text, .fb-comment {
+.fb-preview-text, .fb-comment, .fb-album-text {
     display: block;
     background-color: #e1e2e3;
     margin-left: auto;
@@ -225,9 +225,13 @@ img.fb-comment-account {
     display: block;
     clear:both;
 }
-.fb-preview-text{
+.fb-preview-text, .fb-album-text {
 	display:table !important;
 	clear:both !important;
+}
+.fb-album-text {
+    margin-bottom:6px;
+    width:100%;
 }
 .fb-comment {
     background-color: #e9eaeb;
@@ -247,6 +251,7 @@ img.fb-comment-account {
 .fb-like-container {
     display: block;
     float: right;
+    margin-left:6px;
 }
 
 .fb-btn-more {

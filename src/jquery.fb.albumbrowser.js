@@ -76,7 +76,7 @@
                     success: function (result) {
                         if ($(result.data).length > 0) {
 
-                            if (settings.albumsPageSize > 0) {
+                            if (settings.albumsPageSize!=null && settings.albumsPageSize > 0) {
                                 var moreButton = $(container).find(".fb-btn-more");
                                 if (moreButton.length == 0) {
                                     moreButton = $("<div>", { class: "fb-btn-more fb-albums-more", text: settings.albumsMoreButtonText });
@@ -231,10 +231,13 @@
                     cache: false,
                     dataType: 'jsonp',
                     success: function (result) {
-
                         if (result.data.length > 0) {
 
-                            if (settings.photosPageSize > 0) {
+                            if (settings.showComments) {
+                                /* loadComments("", $(container).parent()); */
+                            }
+
+                            if (settings.photosPageSize!=null && settings.photosPageSize > 0) {
                                 var moreButton = $(container).parent().find(".fb-btn-more");
                                 if (moreButton.length == 0) {
                                     moreButton = $("<div>", { class: "fb-btn-more fb-photos-more", text: settings.photosMoreButtonText });
@@ -251,7 +254,6 @@
                                     });
                                 }
                             }
-
 
                             for (a = 0; a < result.data.length; a++) {
                                 var photoListItem = $("<li>", { class: "fb-photo" });
@@ -335,10 +337,6 @@
                             if (result.paging && result.paging.next && result.paging.next != "") {
                                 loadPhotos(result.paging.next, container);
                             }
-
-
-
-
                         }
 
                     }
@@ -406,7 +404,6 @@
 								}, 1000);
 							}
                         }
-
                     }
                 });
 
@@ -472,7 +469,7 @@
 
                     overlay.append(lightboxContent);
                     lightboxContent.append($("<img>", { class: "fb-preview-img" }));
-                    if (settings.showImageText || settings.likeButton) {
+                    if (settings.showImageText || settings.likeButton || settings.shareButton) {
                         lightboxContent.append($("<div>", { class: "fb-preview-text" }));
                     }
                     overlay.append($("<img>", { class: "fb-preview-img-prev", src: "src/prev-icon.png" }));
@@ -545,6 +542,7 @@
                                 previewText.hide();
                             }
                             previewText.css("maxWidth", $(this).width() - 12);
+                            previewText.css("minWidth", $(this).width() - 12);
                             $(".fb-comment,.fb-comment-more").css("maxWidth", $(this).width() - 12);
                             $(this).show();
 
