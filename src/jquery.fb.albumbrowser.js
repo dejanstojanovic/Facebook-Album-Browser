@@ -535,7 +535,7 @@
                         if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
                             $(previewImage).show();
                         }
-
+                        previewImage.unbind("load");
                         previewImage.load(function () {
                             previewContent.css("display", "block");
                             if (previewText.text().trim() != "" || settings.likeBtn) {
