@@ -223,10 +223,11 @@ img.fb-comment-account {
     text-align: left;
     padding: 6px;
     display: block;
+    clear:both;
 }
 .fb-preview-text{
-	display:table;
-	clear:both;
+	display:table !important;
+	clear:both !important;
 }
 .fb-comment {
     background-color: #e9eaeb;
