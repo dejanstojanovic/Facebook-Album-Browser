@@ -4,6 +4,8 @@ Facebook-Album-Browser
 Reponsive jQuery plugin for browsing public albums of a Facebook account.
 Plugin is suitable for both desktop and mobile websites.
 
+![ScreenShot](http://dejanstojanovic.net/media/31597/facebook-album-browser.png)
+
 ###What can I do with it
 The main purpose of this plugin is to enable to embed and customize phot albums in your website without being limited with Facebook styling. It also allows you to use it as picker as it raises events for clicked album/photo.
 
@@ -91,9 +93,6 @@ Test document test.html is contained in the soolution. You can download it for t
 </script>
 ```
 To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit/bpcaagDgxVClt1lsDH5a?p=preview)
-
-![ScreenShot](http://dejanstojanovic.net/media/31597/facebook-album-browser.png)
-
 
 ![ScreenShot](http://dejanstojanovic.net/media/31657/faceboo-phptp-preview.png)
 
