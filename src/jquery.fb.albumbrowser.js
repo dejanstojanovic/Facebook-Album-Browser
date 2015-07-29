@@ -68,6 +68,9 @@
             }
 
             function loadAlbums(url) {
+
+                $(albumList).addClass("fb-loading-image");
+
                 $.ajax({
                     type: 'GET',
                     url: url,
@@ -156,13 +159,11 @@
                                         albumListItem.append($("<div>", { class: "fb-album-count", text: $(result.data).get(a).count }));
                                     }
                                     $(albumList).append(albumListItem);
-
-
+                                    $(albumList).removeClass("fb-loading-image");
                                     if (settings.albumsPageSize > 0 && $(albumList).find("li").index(albumListItem) >= settings.albumsPageSize) {
                                         albumListItem.hide();
                                         $(container).find(".fb-albums-more").fadeIn();
                                     }
-
                                     $(albumListItem).click(function () {
                                         var self = $(this);
                                         $(selector).append($("<div>", { class: "fb-album-preview" }));
@@ -225,6 +226,9 @@
             }
 
             function loadPhotos(url, container) {
+
+                $(container).addClass("fb-loading-image");
+
                 $.ajax({
                     type: 'GET',
                     url: url,
@@ -320,8 +324,9 @@
                                     }
                                 }
                                 photoListItem.append(photoLink);
-
                                 container.append(photoListItem);
+                                $(container).removeClass("fb-loading-image");
+
                                 if (settings.photosPageSize > 0 && $(container).find("li").index(photoListItem) >= settings.photosPageSize) {
                                     photoListItem.hide();
                                     $(container).find(".fb-photos-more").fadeIn();

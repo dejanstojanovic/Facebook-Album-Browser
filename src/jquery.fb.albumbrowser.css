@@ -18,8 +18,14 @@ ul.fb-albums, ul.fb-photos {
     font-size: 14px;
     margin: 0px;
     padding: 0px;
+    min-height:130px;
+    background-image:none;
 }
-
+.fb-loading-image{
+    background-image:url('loader.gif') !important;
+    background-position: center center;
+    background-repeat:no-repeat;
+}
 .fb-loading {
     background-color: #f7f7f7;
     border-radius: 6px;
