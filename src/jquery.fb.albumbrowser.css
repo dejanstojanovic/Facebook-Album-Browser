@@ -121,7 +121,6 @@ img.fb-albums-list {
     .fb-account-info img {
         display: inline-block;
         vertical-align: middle;
-        border-radius: 3px;
     }
 
 /*Simple lightbox*/
@@ -201,11 +200,11 @@ img.fb-albums-list {
 
 img.fb-comment-account {
     display: inline-block;
-	width:50px;
-	height:50px;
-	background-image:url('loader.gif');
-	background-position:center center;
-	background-repeat:no-repeat;
+    width: 50px;
+    height: 50px;
+    background-image: url('loader.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .fb-comment-account {
@@ -223,16 +222,19 @@ img.fb-comment-account {
     text-align: left;
     padding: 6px;
     display: block;
-    clear:both;
+    clear: both;
 }
+
 .fb-preview-text, .fb-album-text {
-	display:table !important;
-	clear:both !important;
+    display: table !important;
+    clear: both !important;
 }
+
 .fb-album-text {
-    margin-bottom:6px;
-    width:100%;
+    margin-bottom: 6px;
+    width: 100%;
 }
+
 .fb-comment {
     background-color: #e9eaeb;
     border-bottom: 1px solid #e1e2e3;
@@ -251,7 +253,7 @@ img.fb-comment-account {
 .fb-like-container {
     display: block;
     float: right;
-    margin-left:6px;
+    margin-left: 6px;
 }
 
 .fb-btn-more {
