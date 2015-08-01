@@ -444,9 +444,14 @@
                 accountInfoLink.append($("<img>", { src: "https://graph.facebook.com/" + settings.account + "/picture?type=square" }));
                 accountInfoLink.append($("<h3>", { class: "fb-account-heading" }));
                 $(container).append(accountInfoContainer);
+                var invokeUrl = "https://graph.facebook.com/" + settings.account;
+                if (settings.accessToken != "") {
+                    invokeUrl += "?access_token=" + settings.accessToken;
+                }
+
                 $.ajax({
                     type: 'GET',
-                    url: "https://graph.facebook.com/" + settings.account,
+                    url: invokeUrl,
                     cache: false,
                     dataType: 'jsonp',
                     success: function (result) {
