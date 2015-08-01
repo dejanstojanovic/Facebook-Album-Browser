@@ -4,7 +4,7 @@ Facebook-Album-Browser
 Reponsive jQuery plugin for browsing public albums of a Facebook account.
 Plugin is suitable for both desktop and mobile websites.
 
-![ScreenShot](http://dejanstojanovic.net/media/31597/facebook-album-browser.png)
+![ScreenShot](http://dejanstojanovic.net/media/31680/fb-albums.png)
 
 ###What can I do with it
 The main purpose of this plugin is to enable to embed and customize phot albums in your website without being limited with Facebook styling. It also allows you to use it as picker as it raises events for clicked album/photo.
@@ -94,7 +94,7 @@ Test document test.html is contained in the soolution. You can download it for t
 ```
 To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit/bpcaagDgxVClt1lsDH5a?p=preview)
 
-![ScreenShot](http://dejanstojanovic.net/media/31657/faceboo-phptp-preview.png)
+![ScreenShot](http://dejanstojanovic.net/media/31679/fb-photo.png)
 
 ###Using it as a photo-picker
 This plugin has buit in support for multiple picker, wich allows you to browse through albums and photos and pick them. The plugin will store all picked photos in an object array and make them available.
@@ -134,7 +134,7 @@ You can either access picked images on your custom page event or you can hook to
 ```
 
 
-![ScreenShot](http://dejanstojanovic.net/media/31674/fb-photo-picker.png)
+![ScreenShot](http://dejanstojanovic.net/media/31681/fb-album.png)
 
 ###Facebook access tokens (by [@rockyr1](https://github.com/rockyr1))
 Facebook always keeps changing the way data can be accessed through their APIs, recent one has been to have an AccessToken to access any Facebook data. Every time Facebook does this, there are plenty of plugins, widgets and certain features within a website which break. That's why its always important to understand the external dependencies and also to have a dedicated Web Admin to manage changes like this on your website.
