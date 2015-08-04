@@ -40,7 +40,8 @@ The following are options for the plugin which are used to congigure the plugin 
 * **skipAlbums** - List of IDs or names or combined IDs and names of albums which will not be browsed (e.g ["Profile Pictures", "Timeline Photos"]). Default value is _[]_
 * **lightbox** - Show full size image in a lightbox style when clicked. Default value is _true_
 * **photosCheckbox** - Allows using of plugin as an image multipicker. Default value is _true_
-* **likeButton** - Add facebook like button for image on image lightbox preview. Default value if _true_
+* **likeButton** - Adds facebook like button for image on image lightbox preview. Default value if _true_
+* **shareButton** - Adds facebook share button is like button is enabled. Adds AddThis buttons if addThis is set with AddThis pub-id. Default value is _true_
 * **albumsPageSize** - Page size of album browsing. If set to 0, paging is off. Default value if _0_
 * **albumsMoreButtonText** - Text value for more button when album paging is on. Default value if _"more albums..."_
 * **photosPageSize** - Page size of album photo browsing. If set to 0, paging is off. Default value if _0_
@@ -48,6 +49,7 @@ The following are options for the plugin which are used to congigure the plugin 
 * **onlyAlbum** - Skips album browsing and starts browsing album with specific id. Default value is _"null"_
 * **showComments** - Shows comments of the photo when previewing photo. Default value is _"false"_
 * **commentsLimit** - Number of comments per page. Default value is _"5"_
+* **addThis** - Enables sharing via AddThis buttons if AddThis pub-id is provided and _shareButton_ is enabled. Default value is _null_
 
 ###Events
 The following are events raised by plugin:
