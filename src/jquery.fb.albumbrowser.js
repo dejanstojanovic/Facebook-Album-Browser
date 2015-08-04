@@ -484,10 +484,12 @@
                     container.append(toolboxElement);
                     if (typeof addthis === 'undefined') {
                         $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=" + settings.addThis, function () {
+                            addthis.update('share', 'url', url);
                             addthis.toolbox('.addthis_toolbox');
                         });
                     }
                     else {
+                        addthis.update('share', 'url', url);
                         addthis.toolbox('.addthis_toolbox');
                     }
                 }
