@@ -474,13 +474,11 @@
                 if (settings.shareButton && settings.addThis != null && settings.addThis != "") {
                     //Add this
                     var toolboxElement = $("<div>", { "data-url": url, class: "addthis_toolbox addthis_default_style" });
-                    toolboxElement.append($("<a>", { class: "addthis_button_preferred_1" }));
-                    toolboxElement.append($("<a>", { class: "addthis_button_preferred_2" }));
-                    toolboxElement.append($("<a>", { class: "addthis_button_preferred_3" }));
-                    toolboxElement.append($("<a>", { class: "addthis_button_preferred_4" }));
+                    for (btn = 1; btn <= 4; btn++) {
+                        toolboxElement.append($("<a>", { class: "addthis_button_preferred_"+btn }));
+                    }
                     toolboxElement.append($("<a>", { class: "addthis_button_compact" }));
                     toolboxElement.append($("<a>", { class: "addthis_counter addthis_bubble_style" }));
-
                     container.append(toolboxElement);
                     if (typeof addthis === 'undefined') {
                         $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=" + settings.addThis, function () {
