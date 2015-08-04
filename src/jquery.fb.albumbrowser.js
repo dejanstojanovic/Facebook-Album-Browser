@@ -493,7 +493,6 @@
                 }
             }
 
-
             function initLightboxes(photoLink) {
                 var overlay = $(".fb-preview-overlay");
                 if (overlay.length == 0) {
