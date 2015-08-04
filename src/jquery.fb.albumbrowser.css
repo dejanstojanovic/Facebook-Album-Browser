@@ -231,6 +231,12 @@ img.fb-comment-account {
     clear: both;
 }
 
+.fb-preview-text .addthis_toolbox{
+    display:block;
+    margin-top:6px;
+    margin-bottom:6px;
+}
+
 .fb-preview-text, .fb-album-text {
     display: table !important;
     clear: both !important;

@@ -1,7 +1,7 @@
 ﻿/*
  * jQuery Plugin: jQuery Facebook Album Browser
  * https://github.com/dejanstojanovic/Facebook-Album-Browser
- * Version 1.2.3
+ * Version 1.3.1
  *
  * Copyright (c) 2015 Dejan Stojanovic (http://dejanstojanovic.net)
  *
@@ -29,6 +29,7 @@
             showImageText: false,
             likeButton: true,
             shareButton: true,
+            addThis: null,
             albumsPageSize: 0,
             albumsMoreButtonText: "more albums...",
             photosPageSize: 0,
@@ -79,7 +80,7 @@
                     success: function (result) {
                         if ($(result.data).length > 0) {
 
-                            if (settings.albumsPageSize!=null && settings.albumsPageSize > 0) {
+                            if (settings.albumsPageSize != null && settings.albumsPageSize > 0) {
                                 var moreButton = $(container).find(".fb-btn-more");
                                 if (moreButton.length == 0) {
                                     moreButton = $("<div>", { class: "fb-btn-more fb-albums-more", text: settings.albumsMoreButtonText });
@@ -241,7 +242,7 @@
                                 /* loadComments("", $(container).parent()); */
                             }
 
-                            if (settings.photosPageSize!=null && settings.photosPageSize > 0) {
+                            if (settings.photosPageSize != null && settings.photosPageSize > 0) {
                                 var moreButton = $(container).parent().find(".fb-btn-more");
                                 if (moreButton.length == 0) {
                                     moreButton = $("<div>", { class: "fb-btn-more fb-photos-more", text: settings.photosMoreButtonText });
@@ -403,11 +404,11 @@
                             if (nextUrl == null) {
                                 $(document).scrollTop();
                             }
-							else{
-								$(".fb-preview-overlay").animate({
-									scrollTop: $(container).find(".fb-comment").last().offset().top
-								}, 1000);
-							}
+                            else {
+                                $(".fb-preview-overlay").animate({
+                                    scrollTop: $(container).find(".fb-comment").last().offset().top
+                                }, 1000);
+                            }
                         }
                     }
                 });
@@ -469,7 +470,29 @@
                     container.prepend(likeBtnContainer);
                     FB.XFBML.parse();
                 }
+
+                if (settings.shareButton && settings.addThis != null && settings.addThis != "") {
+                    //Add this
+                    var toolboxElement = $("<div>", { "data-url": url, class: "addthis_toolbox addthis_default_style" });
+                    toolboxElement.append($("<a>", { class: "addthis_button_preferred_1" }));
+                    toolboxElement.append($("<a>", { class: "addthis_button_preferred_2" }));
+                    toolboxElement.append($("<a>", { class: "addthis_button_preferred_3" }));
+                    toolboxElement.append($("<a>", { class: "addthis_button_preferred_4" }));
+                    toolboxElement.append($("<a>", { class: "addthis_button_compact" }));
+                    toolboxElement.append($("<a>", { class: "addthis_counter addthis_bubble_style" }));
+
+                    container.append(toolboxElement);
+                    if (typeof addthis === 'undefined') {
+                        $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=" + settings.addThis, function () {
+                            addthis.toolbox('.addthis_toolbox');
+                        });
+                    }
+                    else {
+                        addthis.toolbox('.addthis_toolbox');
+                    }
+                }
             }
+
 
             function initLightboxes(photoLink) {
                 var overlay = $(".fb-preview-overlay");
