@@ -96,7 +96,7 @@ Test document test.html is contained in the soolution. You can download it for t
 ```
 To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit/bpcaagDgxVClt1lsDH5a?p=preview)
 
-![ScreenShot](http://dejanstojanovic.net/media/31679/fb-photo.png)
+![ScreenShot](http://dejanstojanovic.net/media/31684/preview-with-share.png)
 
 ###Using it as a photo-picker
 This plugin has buit in support for multiple picker, wich allows you to browse through albums and photos and pick them. The plugin will store all picked photos in an object array and make them available.
