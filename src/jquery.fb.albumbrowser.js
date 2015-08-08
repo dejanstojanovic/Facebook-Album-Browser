@@ -642,6 +642,27 @@
                                 }
                                 return false;
                             });
+
+                            $(document).unbind("keypress");
+                            $(document).keypress(function (event) {
+                                var code = (event.keyCode ? event.keyCode : event.which);
+                                switch (code) {
+                                    case 37:
+                                        event.preventDefault();
+                                        $(prevImg).click();
+                                        break;
+                                    case 39:
+                                        event.preventDefault();
+                                        $(nextImg).click();
+                                        break;
+                                    case 27:
+                                        event.preventDefault();
+                                        $(overlay).click();
+                                        break;
+                                }
+                            });
+
+
                             $(this).fadeIn();
                         });
                         overlay.fadeIn();
