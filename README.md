@@ -98,6 +98,26 @@ To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit
 
 ![ScreenShot](http://dejanstojanovic.net/media/31684/preview-with-share.png)
 
+###AddThis support
+Starting from version 1.3.1 plugin supports sharing via AddThis sharing. It allows you to share facebook URL to an image direcly from the image lightbox preview in a plugin.
+All that needs to be done is to enable sharing button and provide AddThis pub-id to plugin in initialization settings and you are set to share Facebook photo URL direcly on your website.
+
+```html
+<div class="fb-album-container"></div>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+      $(".fb-album-container").FacebookAlbumBrowser({
+        account: "natgeo",
+        showAccountInfo: true,
+        lightbox: true,
+	    shareButton: true,
+        addThis:"ra-xxxxxxxxxxxxxxxx"
+      });
+    });
+</script>
+```
+
 ###Using it as a photo-picker
 This plugin has buit in support for multiple picker, wich allows you to browse through albums and photos and pick them. The plugin will store all picked photos in an object array and make them available.
 
