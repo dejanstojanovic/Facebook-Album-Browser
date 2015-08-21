@@ -95,6 +95,9 @@ Test document test.html is contained in the soolution. You can download it for t
 </script>
 ```
 To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit/bpcaagDgxVClt1lsDH5a?p=preview)
+* **[Checking enabled demo](http://embed.plnkr.co/RvxmRHrznDIFhpTQNcQi/preview)**
+* **[AddThis sharing enabled demo](http://embed.plnkr.co/LRl30d9t8X2Fljs861hJ/preview)**
+
 
 ![ScreenShot](http://dejanstojanovic.net/media/31684/preview-with-share.png)
 
