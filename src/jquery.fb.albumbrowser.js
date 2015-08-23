@@ -30,6 +30,7 @@
             likeButton: true,
             shareButton: true,
             addThis: null,
+            pluginImagesPath: "src/",
             albumsPageSize: 0,
             albumsMoreButtonText: "more albums...",
             photosPageSize: 0,
@@ -174,7 +175,7 @@
                                             alt: "",
                                             height: 32,
                                             width: 32,
-                                            src: "src/back.png",
+                                            src: settings.pluginImagesPath + "back.png",
                                             class: "fb-albums-list"
                                         }));
                                         previewContainer.append($("<h3>", { class: "fb-album-heading", text: $(self).find(".fb-album-title").text() }));
@@ -504,8 +505,8 @@
                     if (settings.showImageText || settings.likeButton || settings.shareButton) {
                         lightboxContent.append($("<div>", { class: "fb-preview-text" }));
                     }
-                    overlay.append($("<img>", { class: "fb-preview-img-prev", src: "src/prev-icon.png" }));
-                    overlay.append($("<img>", { class: "fb-preview-img-next", src: "src/next-icon.png" }));
+                    overlay.append($("<img>", { class: "fb-preview-img-prev", src: settings.pluginImagesPath + "prev-icon.png" }));
+                    overlay.append($("<img>", { class: "fb-preview-img-next", src: settings.pluginImagesPath + "next-icon.png" }));
 
                     $("body").append(overlay);
                     overlay = $(".fb-preview-overlay");
