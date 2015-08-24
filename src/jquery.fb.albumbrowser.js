@@ -103,11 +103,10 @@
                             }
 
                             for (a = 0; a < $(result.data).length; a++) {
-                                if (
-                                    (settings.skipAlbums.indexOf($(result.data).get(a).name) > -1 || settings.skipAlbums.indexOf($(result.data).get(a).id.toString()) > -1)
-                                    &&
-                                    (settings.includeAlbums.length > 0 && (settings.includeAlbums.indexOf($(result.data).get(a).name) > -1 || settings.includeAlbums.indexOf($(result.data).get(a).id.toString()) > -1))
-                                    ) {
+                                if (settings.skipAlbums.length > 0 && (settings.skipAlbums.indexOf($(result.data).get(a).name) > -1 || settings.skipAlbums.indexOf($(result.data).get(a).id.toString()) > -1)) {
+                                    continue;
+                                }
+                                if (settings.includeAlbums.length > 0 && (settings.includeAlbums.indexOf($(result.data).get(a).name) < 0 || settings.includeAlbums.indexOf($(result.data).get(a).id.toString()) < 0)) {
                                     continue;
                                 }
                                 var albumListItem = $("<li>", { class: "fb-album", "data-id": $(result.data).get(a).id });
@@ -593,8 +592,8 @@
                             prevImg.show();
                             prevImg.unbind("click");
                             prevImg.click(function () {
-
-                                var currentImage = $(this).parent().find(".fb-preview-img");
+                                var currentImageContainer = $(this).parent().find(".fb-preview-content");
+                                var currentImage = $(currentImageContainer).find(".fb-preview-img");
                                 var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
                                 if (currentImageLinkItem.length != 0) {
                                     var prev = currentImageLinkItem.parent().prev();
@@ -623,8 +622,8 @@
                             nextImg.show();
                             nextImg.unbind("click");
                             nextImg.click(function () {
-
-                                var currentImage = $(this).parent().find(".fb-preview-img");
+                                var currentImageContainer = $(this).parent().find(".fb-preview-content");
+                                var currentImage = $(currentImageContainer).find(".fb-preview-img");
                                 var currentImageLinkItem = $("[href='" + currentImage.attr("src") + "']");
                                 if (currentImageLinkItem.length != 0) {
                                     var next = currentImageLinkItem.parent().next();
