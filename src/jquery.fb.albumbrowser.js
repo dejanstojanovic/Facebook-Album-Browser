@@ -19,6 +19,7 @@
             showComments: true,
             commentsLimit: 5,
             skipAlbums: [],
+            includeAlbums: [],
             onlyAlbum: null,
             lightbox: true,
             photosCheckbox: true,
@@ -102,7 +103,11 @@
                             }
 
                             for (a = 0; a < $(result.data).length; a++) {
-                                if (settings.skipAlbums.indexOf($(result.data).get(a).name) > -1 || settings.skipAlbums.indexOf($(result.data).get(a).id.toString()) > -1) {
+                                if (
+                                    (settings.skipAlbums.indexOf($(result.data).get(a).name) > -1 || settings.skipAlbums.indexOf($(result.data).get(a).id.toString()) > -1)
+                                    &&
+                                    (settings.includeAlbums.length > 0 && (settings.includeAlbums.indexOf($(result.data).get(a).name) > -1 || settings.includeAlbums.indexOf($(result.data).get(a).id.toString()) > -1))
+                                    ) {
                                     continue;
                                 }
                                 var albumListItem = $("<li>", { class: "fb-album", "data-id": $(result.data).get(a).id });
@@ -476,7 +481,7 @@
                     //Add this
                     var toolboxElement = $("<div>", { "data-url": url, class: "addthis_toolbox addthis_default_style" });
                     for (btn = 1; btn <= 4; btn++) {
-                        toolboxElement.append($("<a>", { class: "addthis_button_preferred_"+btn }));
+                        toolboxElement.append($("<a>", { class: "addthis_button_preferred_" + btn }));
                     }
                     toolboxElement.append($("<a>", { class: "addthis_button_compact" }));
                     toolboxElement.append($("<a>", { class: "addthis_counter addthis_bubble_style" }));
