@@ -21,6 +21,7 @@
             skipAlbums: [],
             includeAlbums: [],
             onlyAlbum: null,
+            showAlbumNameInPreview: true,
             lightbox: true,
             photosCheckbox: true,
             albumSelected: null,
@@ -58,18 +59,7 @@
             else {
                 invokeUrl = "https://graph.facebook.com/" + settings.onlyAlbum + "/photos";
             }
-
             var albumList = $(container).find(".fb-albums");
-
-            /*
-            if (settings.onlyAlbum != null) {
-                invokeUrl = "https://graph.facebook.com/" + settings.onlyAlbum + "/photos";
-            }
-            else {
-                invokeUrl = "https://graph.facebook.com/" + settings.account + "/albums";
-            }
-            */
-
             if (settings.accessToken != "") {
                 invokeUrl += "?access_token=" + settings.accessToken;
             }
@@ -194,17 +184,10 @@
                                             src: settings.pluginImagesPath + "back.png",
                                             class: "fb-albums-list"
                                         }));
+                                        /*
                                         previewContainer.append($("<h3>", { class: "fb-album-heading", text: $(self).find(".fb-album-title").text() }));
-                                        previewContainer.find("img.fb-albums-list,h3.fb-album-heading").click(function () {
-                                            previewContainer.fadeOut(function () {
-                                                $(selector).find(".fb-albums").fadeIn(function () {
-                                                    if (settings.albumsPageSize > 0 && $(selector).find("li.fb-album:hidden").length > 0) {
-                                                        $(selector).find("div.fb-albums-more").show();
-                                                    }
-                                                });
-                                                previewContainer.remove();
-                                            });
-                                        });
+                                        */
+                                        
                                         $(previewContainer).append($("<ul>", { class: "fb-photos" }));
                                         photosContainer = $(previewContainer).find("ul.fb-photos");
 
@@ -247,6 +230,44 @@
 
                 $(container).addClass("fb-loading-image");
 
+                var previewContainer = container.parent();
+                if (previewContainer.find(".fb-photo").length == 0) {
+                    //alert(url);
+
+                    var backButton = previewContainer.find("img.fb-albums-list");
+                    if (backButton.length > 0) {
+                        backButton.after($("<h3>", { class: "fb-album-heading", text: "" }));
+                    }
+                    else {
+                        previewContainer.prepend($("<h3>", { class: "fb-album-heading", text: "" }));
+                    }
+
+                    previewContainer.find("img.fb-albums-list,h3.fb-album-heading").click(function () {
+                        previewContainer.fadeOut(function () {
+                            $(selector).find(".fb-albums").fadeIn(function () {
+                                if (settings.albumsPageSize > 0 && $(selector).find("li.fb-album:hidden").length > 0) {
+                                    $(selector).find("div.fb-albums-more").show();
+                                }
+                            });
+                            previewContainer.remove();
+                        });
+                    });
+
+                    if (settings.showAlbumNameInPreview) {
+                        $.ajax({
+                            type: 'GET',
+                            url: url.replace("/photos", "/"),
+                            cache: false,
+                            dataType: 'jsonp',
+                            success: function (albumData) {
+                                if (albumData != null) {
+                                    previewContainer.find(".fb-album-heading").text(albumData.name);
+                                }
+                            }
+                        });
+                    }
+                }
+
                 $.ajax({
                     type: 'GET',
                     url: url,
@@ -258,6 +279,8 @@
                             if (settings.showComments) {
                                 /* loadComments("", $(container).parent()); */
                             }
+
+
 
                             if (settings.photosPageSize != null && settings.photosPageSize > 0) {
                                 var moreButton = $(container).parent().find(".fb-btn-more");
