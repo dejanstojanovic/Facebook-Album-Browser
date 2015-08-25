@@ -44,20 +44,32 @@
 
         selector.each(function (index) {
             var container = selector.get(index);
+            var invokeUrl = "";
             if (settings.showAccountInfo) {
                 addAccountInfo(container);
             }
-            $(container).append($('<ul>', {
-                class: "fb-albums"
-            }));
+
+            if (settings.onlyAlbum == null) {
+                $(container).append($('<ul>', {
+                    class: "fb-albums"
+                }));
+                invokeUrl = "https://graph.facebook.com/" + settings.account + "/albums";
+            }
+            else {
+                invokeUrl = "https://graph.facebook.com/" + settings.onlyAlbum + "/photos";
+            }
+
             var albumList = $(container).find(".fb-albums");
-            var invokeUrl = "";
+
+            /*
             if (settings.onlyAlbum != null) {
                 invokeUrl = "https://graph.facebook.com/" + settings.onlyAlbum + "/photos";
             }
             else {
                 invokeUrl = "https://graph.facebook.com/" + settings.account + "/albums";
             }
+            */
+
             if (settings.accessToken != "") {
                 invokeUrl += "?access_token=" + settings.accessToken;
             }
