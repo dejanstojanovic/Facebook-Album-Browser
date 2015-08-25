@@ -184,10 +184,7 @@
                                             src: settings.pluginImagesPath + "back.png",
                                             class: "fb-albums-list"
                                         }));
-                                        /*
-                                        previewContainer.append($("<h3>", { class: "fb-album-heading", text: $(self).find(".fb-album-title").text() }));
-                                        */
-                                        
+
                                         $(previewContainer).append($("<ul>", { class: "fb-photos" }));
                                         photosContainer = $(previewContainer).find("ul.fb-photos");
 
@@ -231,27 +228,38 @@
                 $(container).addClass("fb-loading-image");
 
                 var previewContainer = container.parent();
+                if (container.hasClass("fb-album-container")) {
+                    previewContainer = container;
+                }
                 if (previewContainer.find(".fb-photo").length == 0) {
-                    //alert(url);
-
                     var backButton = previewContainer.find("img.fb-albums-list");
+                    var titleElement = $("<h3>", { class: "fb-album-heading", text: "" });
                     if (backButton.length > 0) {
-                        backButton.after($("<h3>", { class: "fb-album-heading", text: "" }));
+                        backButton.after(titleElement);
                     }
                     else {
-                        previewContainer.prepend($("<h3>", { class: "fb-album-heading", text: "" }));
+                        backButton = previewContainer.find(".fb-account-info");
+                        if (backButton.length > 0) {
+                            backButton.after(titleElement);
+                            titleElement.addClass("fb-album-heading-single");
+                        }
+                        else {
+                            previewContainer.prepend(titleElement);
+                        }
                     }
 
-                    previewContainer.find("img.fb-albums-list,h3.fb-album-heading").click(function () {
-                        previewContainer.fadeOut(function () {
-                            $(selector).find(".fb-albums").fadeIn(function () {
-                                if (settings.albumsPageSize > 0 && $(selector).find("li.fb-album:hidden").length > 0) {
-                                    $(selector).find("div.fb-albums-more").show();
-                                }
+                    if (settings.onlyAlbum == null) {
+                        previewContainer.find("img.fb-albums-list,h3.fb-album-heading").click(function () {
+                            previewContainer.fadeOut(function () {
+                                $(selector).find(".fb-albums").fadeIn(function () {
+                                    if (settings.albumsPageSize > 0 && $(selector).find("li.fb-album:hidden").length > 0) {
+                                        $(selector).find("div.fb-albums-more").show();
+                                    }
+                                });
+                                previewContainer.remove();
                             });
-                            previewContainer.remove();
                         });
-                    });
+                    }
 
                     if (settings.showAlbumNameInPreview) {
                         $.ajax({

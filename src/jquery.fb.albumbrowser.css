@@ -11,6 +11,11 @@ h3.fb-album-heading {
     cursor: pointer;
 }
 
+h3.fb-album-heading-single {
+    cursor: default !important;
+    display:block !important;
+}
+
 ul.fb-albums, ul.fb-photos {
     list-style: none;
     list-style-type: none;
