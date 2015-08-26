@@ -106,12 +106,14 @@
                             }
 
                             for (a = 0; a < $(result.data).length; a++) {
+
                                 if (settings.skipAlbums.length > 0 && (settings.skipAlbums.indexOf($(result.data).get(a).name) > -1 || settings.skipAlbums.indexOf($(result.data).get(a).id.toString()) > -1)) {
                                     continue;
                                 }
-                                if (settings.includeAlbums.length > 0 && (settings.includeAlbums.indexOf($(result.data).get(a).name) < 0 || settings.includeAlbums.indexOf($(result.data).get(a).id.toString()) < 0)) {
+                                if (settings.includeAlbums.length > 0 && (settings.includeAlbums.indexOf($(result.data).get(a).name) < 0 && settings.includeAlbums.indexOf($(result.data).get(a).id.toString()) < 0)) {
                                     continue;
                                 }
+
                                 var albumListItem = $("<li>", { class: "fb-album", "data-id": $(result.data).get(a).id });
                                 if ($(result.data).get(a).count == null && settings.skipEmptyAlbums) {
                                     continue;
