@@ -66,6 +66,7 @@
 
             if (settings.onlyAlbum != null) {
                 loadPhotos(invokeUrl, $(container));
+                addLazyImageLoadHandler();
 
             }
             else {
@@ -148,14 +149,8 @@
                                                 });
 
                                                 loadIfVisible(albumThumb);
-                                                $(window).scroll(function () {
-                                                    $(".fb-album-thumb[src='']").each(function () {
-                                                        return loadIfVisible($(this));
-                                                    });
-                                                    $(".fb-photo-thumb[src='']").each(function () {
-                                                        return loadIfVisible($(this));
-                                                    });
-                                                });
+                                                addLazyImageLoadHandler();
+
                                             }
                                             else {
                                                 listItem.remove();
@@ -476,7 +471,6 @@
                     if (isScrolledIntoView($(element)) && $(photoThumb).attr("src") == "") {
                         $(photoThumb).attr("src", $(photoThumb).attr("data-src"));
                         $(photoThumb).removeAttr("data-src");
-
                         return true;
                     }
                     else {
@@ -484,6 +478,17 @@
                     }
                 }
                 return true;
+            }
+
+            function addLazyImageLoadHandler() {
+                $(window).scroll(function () {
+                    $(".fb-album-thumb[src='']").each(function () {
+                        return loadIfVisible($(this));
+                    });
+                    $(".fb-photo-thumb[src='']").each(function () {
+                        return loadIfVisible($(this));
+                    });
+                });
             }
 
             function addAccountInfo(container) {
