@@ -3,8 +3,8 @@
 <head>
     <title></title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript" src="src/jquery.fb.albumbrowser.js"></script>
-    <link rel="stylesheet" type="text/css" href="src/jquery.fb.albumbrowser.css" />
+    <script type="text/javascript" src="../src/jquery.fb.albumbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/jquery.fb.albumbrowser.css" />
 </head>
 
 <body>
@@ -15,9 +15,7 @@
           $(".fb-album-container").FacebookAlbumBrowser({
                 account: "natgeo",
                 accessToken: "775908159169504|cYEIsh0rs25OQQC8Ex2hXyCOut4",
-                //skipAlbums: ["Profile Pictures", "Timeline Photos"],
-                includeAlbums: ["Profile Pictures", "Timeline Photos"],
-                //onlyAlbum: "10150310813623951",
+                onlyAlbum: "10150310813623951",
                 showComments: true,
                 commentsLimit:3,
                 showAccountInfo: true,
