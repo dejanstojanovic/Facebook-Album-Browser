@@ -21,6 +21,7 @@
             skipAlbums: [],
             includeAlbums: [],
             onlyAlbum: null,
+            thumbnailSize: 130,
             showAlbumNameInPreview: true,
             lightbox: true,
             photosCheckbox: true,
@@ -52,7 +53,8 @@
 
             if (settings.onlyAlbum == null) {
                 $(container).append($('<ul>', {
-                    class: "fb-albums"
+                    class: "fb-albums",
+                    "style": "min-height:"+settings.thumbnailSize+"px !important"
                 }));
                 invokeUrl = "https://graph.facebook.com/" + settings.account + "/albums";
             }
@@ -114,7 +116,11 @@
                                     continue;
                                 }
 
-                                var albumListItem = $("<li>", { class: "fb-album", "data-id": $(result.data).get(a).id });
+                                var albumListItem = $("<li>", {
+                                    class: "fb-album",
+                                    "data-id": $(result.data).get(a).id,
+                                    "style": "height:" + settings.thumbnailSize + "px !important; width:" + settings.thumbnailSize + "px !important"
+                                });
                                 if ($(result.data).get(a).count == null && settings.skipEmptyAlbums) {
                                     continue;
                                 }
@@ -182,7 +188,7 @@
                                             class: "fb-albums-list"
                                         }));
 
-                                        $(previewContainer).append($("<ul>", { class: "fb-photos" }));
+                                        $(previewContainer).append($("<ul>", { class: "fb-photos", "style": "min-height:" + settings.thumbnailSize + "px !important" }));
                                         photosContainer = $(previewContainer).find("ul.fb-photos");
 
                                         var invokeUrl = "https://graph.facebook.com/" + $(self).attr("data-id") + "/photos";
@@ -306,7 +312,10 @@
                             }
 
                             for (a = 0; a < result.data.length; a++) {
-                                var photoListItem = $("<li>", { class: "fb-photo" });
+                                var photoListItem = $("<li>", {
+                                    class: "fb-photo",
+                                    "style": "height:" + settings.thumbnailSize + "px !important; width:" + settings.thumbnailSize + "px !important"
+                                });
                                 var prefWidth = photoListItem.width();
                                 var prefHeight = photoListItem.height();
                                 var albumImg = $(result.data)[a].images[0];
