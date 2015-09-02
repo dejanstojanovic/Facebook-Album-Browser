@@ -38,6 +38,7 @@ The following are options for the plugin which are used to congigure the plugin 
 * **showImageText** - Show or hide text associated to photo in image preview (lightbox). Default value is _false_
 * **skipEmptyAlbums** - Skip albums for which plugin was unable to fetch at least one photo. Default value is _true_
 * **skipAlbums** - List of IDs or names or combined IDs and names of albums which will not be browsed (e.g ["Profile Pictures", "Timeline Photos"]). Default value is _[]_
+* **thumbnailSize** - Size of the thumnails for the album and photos (in pixels). Default value is _130_
 * **lightbox** - Show full size image in a lightbox style when clicked. Default value is _true_
 * **photosCheckbox** - Allows using of plugin as an image multipicker. Default value is _true_
 * **likeButton** - Adds Facebook like button for image on image lightbox preview. Default value if _true_
