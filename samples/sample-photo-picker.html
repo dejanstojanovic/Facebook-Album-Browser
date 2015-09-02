@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../src/jquery.fb.albumbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/jquery.fb.albumbrowser.css" />
+
+    <!-- Picker result element style -->
+    <style type="text/css">
+        .picker-result{
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .picked-photos-table img{
+            width:90px;
+        }
+        .picked-photos-table tr th{
+            text-align:left;
+            background-color:#e2e1e1;
+        }
+        .picked-photos-table td,.picked-photos-table tr th {
+            padding-right:6px;
+            padding-top:6px;
+            text-align:left;
+        }
+        .picked-photos-table{
+            width:100%;
+            display:block;
+        }
+        .picker-result hr{
+            border:1px solid #808080;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fb-album-container"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+          $(".fb-album-container").FacebookAlbumBrowser({
+                account: "natgeo",
+                accessToken: "775908159169504|cYEIsh0rs25OQQC8Ex2hXyCOut4",
+                skipAlbums: ["Profile Pictures", "Timeline Photos", "Photos", "Cover Photos"],
+                showComments: true,
+                commentsLimit:3,
+                showAccountInfo: true,
+                showImageCount: true,
+                showImageText: true,
+                shareButton: false,
+                albumsPageSize: 0,
+                photosPageSize: 0,
+                lightbox: true,
+                photosCheckbox: true,
+				pluginImagesPath: "../src/",
+                likeButton: true,
+                shareButton: true,
+                addThis:"ra-52638e915dd79612",
+                photoChecked: function(photo){
+                    console.log("PHOTO CHECKED: " + photo.id + " - " + photo.url + " - " + photo.thumb);
+                    console.log("CHECKED PHOTOS COUNT: " + this.checkedPhotos.length);
+
+                    var tableRow = $("<tr/>");
+                    var tableThumbCol = $("<td/>");
+                    $(tableThumbCol).append($("<img/>", { src: photo.thumb }));
+                    $(tableRow).append(tableThumbCol);
+                    $(tableRow).append($("<td/>", { text: photo.id }));
+                    $(tableRow).append($("<td/>", { text: photo.url }));
+                    $("table.picked-photos-table").append(tableRow);
+
+                },
+                photoUnchecked: function (photo) {
+                    console.log("PHOTO UNCHECKED: " + photo.id + " - " + photo.url + " - " + photo.thumb);
+                    console.log("CHECKED PHOTOS COUNT: " + this.checkedPhotos.length);
+
+                    $("table.picked-photos-table td:contains(" + photo.id + ")").parent().remove();
+                },
+                albumSelected: function (photo) {
+                    console.log("ALBUM CLICK: " + photo.id + " - " + photo.url + " - " + photo.thumb);
+                },
+                photoSelected: function (photo) {
+                    console.log("PHOTO CLICK: " + photo.id + " - " + photo.url + " - " + photo.thumb);
+                }
+            });
+
+        });
+    </script>
+    <div class="picker-result">
+        <hr />
+        <p>Browse an album and pick photo using checkbox which will appear on hover</p>
+        <table class="picked-photos-table" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Preview</th>
+                <th>Id</th>
+                <th>URL</th>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
