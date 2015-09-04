@@ -95,11 +95,14 @@ Test document test.html is contained in the soolution. You can download it for t
     });
 </script>
 ```
-To see the plugin live in action [checkout demo on plunker](http://plnkr.co/edit/bpcaagDgxVClt1lsDH5a?p=preview)
-* **[Checking enabled demo](http://embed.plnkr.co/RvxmRHrznDIFhpTQNcQi/preview)**
-* **[AddThis sharing enabled demo](http://embed.plnkr.co/LRl30d9t8X2Fljs861hJ/preview)**
-* **[Multiple albums on the same page](http://embed.plnkr.co/6pFJ8ColWafJIVBjOpa8/)**
-
+To see the plugin live in action [checkout demo on CodePen](http://codepen.io/dejanstojanovic/full/QjwLZp)
+* [Loading all albums from the Facebook page](http://codepen.io/dejanstojanovic/full/QjwLZp)
+* [Change thumbnail size](http://codepen.io/dejanstojanovic/full/epmgBL)
+* [Skip specific albums from browsing](http://codepen.io/dejanstojanovic/full/VvYPmY)
+* [Load single album photos](http://codepen.io/dejanstojanovic/full/epmgdL)
+* [Photo picker sample](http://codepen.io/dejanstojanovic/full/NGPdRv)
+* [Load only specific photo albums](http://codepen.io/dejanstojanovic/full/qOERNz)
+* [Multiple plugin instances on page](http://codepen.io/dejanstojanovic/full/LpExNK)
 
 ![ScreenShot](http://dejanstojanovic.net/media/31684/preview-with-share.png)
 
