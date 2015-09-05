@@ -1,7 +1,7 @@
 ﻿/*
  * jQuery Plugin: jQuery Facebook Album Browser
  * https://github.com/dejanstojanovic/Facebook-Album-Browser
- * Version 1.3.1
+ * Version 1.3.3
  *
  * Copyright (c) 2015 Dejan Stojanovic (http://dejanstojanovic.net)
  *
@@ -43,6 +43,7 @@
 
         var settings = $.extend({}, defaults, options);
         var selector = $(this);
+        var openGraphApiUrl = "https://graph.facebook.com/v2.2/";
 
         selector.each(function (index) {
             var container = selector.get(index);
@@ -56,10 +57,10 @@
                     class: "fb-albums",
                     "style": "min-height:"+settings.thumbnailSize+"px !important"
                 }));
-                invokeUrl = "https://graph.facebook.com/" + settings.account + "/albums";
+                invokeUrl = openGraphApiUrl + settings.account + "/albums";
             }
             else {
-                invokeUrl = "https://graph.facebook.com/" + settings.onlyAlbum + "/photos";
+                invokeUrl = openGraphApiUrl + settings.onlyAlbum + "/photos";
             }
             var albumList = $(container).find(".fb-albums");
             if (settings.accessToken != "") {
@@ -125,7 +126,7 @@
                                     continue;
                                 }
                                 else {
-                                    var invokeUrl = "https://graph.facebook.com/" + $(result.data).get(a).cover_photo;
+                                    var invokeUrl = openGraphApiUrl + $(result.data).get(a).cover_photo;
                                     if (settings.accessToken != "") {
                                         invokeUrl += "?access_token=" + settings.accessToken;
                                     }
@@ -191,7 +192,7 @@
                                         $(previewContainer).append($("<ul>", { class: "fb-photos", "style": "min-height:" + settings.thumbnailSize + "px !important" }));
                                         photosContainer = $(previewContainer).find("ul.fb-photos");
 
-                                        var invokeUrl = "https://graph.facebook.com/" + $(self).attr("data-id") + "/photos";
+                                        var invokeUrl = openGraphApiUrl + $(self).attr("data-id") + "/photos";
                                         if (settings.accessToken != "") {
                                             invokeUrl += "?access_token=" + settings.accessToken;
                                         }
@@ -404,7 +405,7 @@
             }
 
             function loadComments(objectId, container, nextUrl) {
-                var url = "https://graph.facebook.com/" + objectId + "/comments?access_token=" + settings.accessToken + "&limit=" + settings.commentsLimit;
+                var url = openGraphApiUrl + objectId + "/comments?access_token=" + settings.accessToken + "&limit=" + settings.commentsLimit;
                 if (nextUrl != null) {
                     url = nextUrl;
                 }
@@ -442,7 +443,7 @@
                             $(commentsMore).css("maxWidth", container.find(".fb-preview-img").width() - 12);
 
                             for (c = 0; c < result.data.length; c++) {
-                                var accountIcon = "https://graph.facebook.com/" + $(result.data)[c].from.id + "/picture?type=square";
+                                var accountIcon = openGraphApiUrl + $(result.data)[c].from.id + "/picture?type=square";
                                 var comment = $("<div/>", { "class": "fb-comment" });
                                 comment.css("maxWidth", container.find(".fb-preview-img").width() - 12);
                                 comment.append($("<img/>", { src: accountIcon, "class": "fb-comment-account" }));
@@ -506,10 +507,10 @@
                 var accountInfoContainer = $("<div>", { class: "fb-account-info" });
                 var accountInfoLink = $("<a>", { target: "_blank", href: "" });
                 accountInfoContainer.append(accountInfoLink);
-                accountInfoLink.append($("<img>", { src: "https://graph.facebook.com/" + settings.account + "/picture?type=square" }));
+                accountInfoLink.append($("<img>", { src: openGraphApiUrl + settings.account + "/picture?type=square" }));
                 accountInfoLink.append($("<h3>", { class: "fb-account-heading" }));
                 $(container).append(accountInfoContainer);
-                var invokeUrl = "https://graph.facebook.com/" + settings.account;
+                var invokeUrl = openGraphApiUrl + settings.account;
                 if (settings.accessToken != "") {
                     invokeUrl += "?access_token=" + settings.accessToken;
                 }
