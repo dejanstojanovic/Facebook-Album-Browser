@@ -166,24 +166,16 @@ You can either access picked images on your custom page event or you can hook to
 
 ![ScreenShot](http://dejanstojanovic.net/media/31681/fb-album.png)
 
-###Facebook access tokens (by [@rockyr1](https://github.com/rockyr1))
-Facebook always keeps changing the way data can be accessed through their APIs, recent one has been to have an AccessToken to access anyFacebook data. Every timeFacebook does this, there are plenty of plugins, widgets and certain features within a website which break. That's why its always important to understand the external dependencies and also to have a dedicated Web Admin to manage changes like this on your website.
+###Acquiring the right access token
+Follow the steps to get the access token to use the plugin
 
-Here are the steps to create or get an Facebook access token
-
-1. Go to http://www.facebook.com/developers, login to your Facebook account, and add the developer app, if requested. It might prompt you to validate your identity by confirming your Phone number or something.
-2. Click the ‘add a new app’ button to create a new app.
-3. Give the app a name, keeping in mind Facebook’s naming policies.
-4. After creating the app, You will be redirected to App’s Dashboard.  Note down the AppID and App_Secret (by clicking on show)
-5. Go to https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id=APP_ID&client_secret=APP_SECRET replacing APP_ID with your newly created app ID and APP_SECRET with your new app Secret. If the credentials are correct, you will see your authentication token at that location.
-
-It’s as simple as that!
-
-This token can now be used in order to retrieve data from a Facebook feed.  For example:https://www.facebook.com/PAGE_OR_USER_ACCOUNT/feed?access_token=ACCESS_TOKEN, replace PAGE_OR_USER_ACCOUNT with the page id or user account name and ACCESS_TOKEN with the token you retrieved in step 5.
-
-Please note currently there is a 60-day limit on these Access tokens after which they expire. There are ways to dynamically get AccessTokens without having to do this manually.
-
-Read whole article at http://doityaar.com/2015/06/how-to-get-facebook-access-token/
+1. Login to developers.facebook.com with your Facebook developer account
+2. Create an App with WWW platform selected
+3. Add url of the website where you are about to use this plugin and save the changes
+4. In a new browser tab visit https://graph.facebook.com/oauth/access_token?client_id={app-id}&client_secret={app-secret}&grant_type=client_credentials
+(values for app-id and app-secret parameters take from the app settings page)
+5. After loading the url above you will get the access token in a response. Sopy the access_token value to plugin settings javascript code you use to initialize the plugin.
+5. Enjoy using the plugin :)
 
 ###Notes
 In order to make this plugin work with Facebook account photos you need to allow **user_photos** permission in your Facebook App that is used to authenticate and add permissions.
