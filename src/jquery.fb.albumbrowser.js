@@ -1,7 +1,7 @@
 ﻿/*
  * jQuery Plugin: jQuery Facebook Album Browser
  * https://github.com/dejanstojanovic/Facebook-Album-Browser
- * Version 1.3.3
+ * Version 1.9.8
  *
  * Copyright (c) 2015 Dejan Stojanovic (http://dejanstojanovic.net)
  *
@@ -43,7 +43,9 @@
 
         var settings = $.extend({}, defaults, options);
         var selector = $(this);
-        var openGraphApiUrl = "https://graph.facebook.com/v2.2/";
+        var openGraphApiUrl = "https://graph.facebook.com/";
+        var albumFields = "&fields=id,count,cover_photo,created_time,from,link,name,type,updated_time";
+        var photoFields = "&fields=id,created_time,from,height,icon,images,link,name,picture,updated_time,width,source";
 
         selector.each(function (index) {
             var container = selector.get(index);
@@ -58,14 +60,18 @@
                     "style": "min-height:"+settings.thumbnailSize+"px !important"
                 }));
                 invokeUrl = openGraphApiUrl + settings.account + "/albums";
+                if (settings.accessToken != "") {
+                    invokeUrl += "?access_token=" + settings.accessToken + albumFields;
+                }
             }
             else {
                 invokeUrl = openGraphApiUrl + settings.onlyAlbum + "/photos";
+                if (settings.accessToken != "") {
+                    invokeUrl += "?access_token=" + settings.accessToken + photoFields;
+                }
             }
             var albumList = $(container).find(".fb-albums");
-            if (settings.accessToken != "") {
-                invokeUrl += "?access_token=" + settings.accessToken;
-            }
+            
 
             if (settings.onlyAlbum != null) {
                 loadPhotos(invokeUrl, $(container));
@@ -126,9 +132,19 @@
                                     continue;
                                 }
                                 else {
-                                    var invokeUrl = openGraphApiUrl + $(result.data).get(a).cover_photo;
+                                    var coverPhoto = $(result.data).get(a).cover_photo;
+                                    var invokeUrl = openGraphApiUrl
+                                    if (typeof coverPhoto != "undefined") {
+                                        if(!isNaN(coverPhoto)){
+                                            invokeUrl += coverPhoto;
+                                        }
+                                        else {
+                                            invokeUrl += coverPhoto.id;
+                                        }
+                                    }
+                                    //var invokeUrl = openGraphApiUrl + $(result.data).get(a).cover_photo;
                                     if (settings.accessToken != "") {
-                                        invokeUrl += "?access_token=" + settings.accessToken;
+                                        invokeUrl += "?access_token=" + settings.accessToken + photoFields;
                                     }
                                     $.ajax({
                                         type: 'GET',
@@ -194,7 +210,7 @@
 
                                         var invokeUrl = openGraphApiUrl + $(self).attr("data-id") + "/photos";
                                         if (settings.accessToken != "") {
-                                            invokeUrl += "?access_token=" + settings.accessToken;
+                                            invokeUrl += "?access_token=" + settings.accessToken + photoFields;
                                         }
 
                                         if (settings.albumSelected != null && typeof (settings.albumSelected) == "function") {
@@ -268,7 +284,7 @@
                     if (settings.showAlbumNameInPreview) {
                         $.ajax({
                             type: 'GET',
-                            url: url.replace("/photos", "/"),
+                            url: url.replace("/photos", "/").replace(photoFields,"&fields=name"),
                             cache: false,
                             dataType: 'jsonp',
                             success: function (albumData) {
