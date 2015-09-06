@@ -466,7 +466,7 @@
                                 var commentText = $("<div/>", { "class": "fb-comment-text" });
 
                                 commentText.append($("<a/>", { "class": "fb-comment-account", target: "_blank", href: "http://facebook.com/" + $(result.data)[c].from.id, text: $(result.data)[c].from.name }));
-                                commentText.append($("<div/>", { "class": "fb-comment-date", text: new Date($(result.data)[c].created_time).toLocaleString() }));
+                                commentText.append($("<div/>", { "class": "fb-comment-date", text: parseDateString($(result.data)[c].created_time).toLocaleString() }));
                                 commentText.append($("<div/>", { text: $(result.data)[c].message }));
                                 comment.append(commentText);
 
@@ -753,6 +753,20 @@
                     }
                 }
                 );
+            }
+
+            function parseDateString(dateStr) {
+                var dateDate = dateStr.split("T")[0];
+                var dateTime = dateStr.split("T")[1].substring(0, 8);
+                var dateResult = new Date(Date.UTC(
+                    dateDate.split("-")[0], /* Year */
+                    dateDate.split("-")[1], /* Month */
+                    dateDate.split("-")[2], /* Day */
+                    dateTime.split(":")[0], /* Hour */
+                    dateTime.split(":")[1], /* Minute */
+                    dateTime.split(":")[2]  /* Second*/
+                ));
+                return dateResult;
             }
 
             function parseLinks(str) {
