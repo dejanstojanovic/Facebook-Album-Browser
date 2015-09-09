@@ -58,10 +58,14 @@ The following are options for the plugin which are used to congigure the plugin 
 
 ###Events
 The following are events raised by plugin:
-* **albumSelected** - Handler function for event raised when album is selecetd in the browser. Default value is _null_
-* **photoSelected** - Handler function for event raised when photo is selecetd in the browser. Default value is _null_
-* **photoChecked** - Handler function for event raised when photo is checked. Default value is _null_
-* **photoUnchecked** - Handler function for event raised when photo is unchecked. Default value is _null_
+
+| Name  		 			| Description				 	|
+| ------------------------- | ----------------------------- |
+| **albumSelected**		 	| Handler function for event raised when album is selecetd in the browser |
+| **photoSelected**		 	| Handler function for event raised when photo is selecetd in the browser |
+| **photoChecked**		 	| Handler function for event raised when photo is checked |
+| **photoUnchecked**		| Handler function for event raised when photo is unchecked |
+
 
 Every event functin returns an object which holds three properties:
 * **id** - image id in Facebook database
