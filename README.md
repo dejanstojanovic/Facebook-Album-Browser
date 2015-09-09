@@ -31,26 +31,30 @@ Simply add a container (div or any other element) and apply the plugin to it.
 
 ###What are options for plugin
 The following are options for the plugin which are used to congigure the plugin instance:
-* **account** - Facebook account for which albums and photos will be fetched and displayed. This parameter is mandatory and must be provided in order for plugin to work.
-* **accessToken** - Access token for accessing non public content for the Facebook account.
-* **showAccountInfo** - Show Facebook account name and icon abowe the browser. Default value is _true_
-* **showImageCount** - Show number of protos in each album. Default value is _true_
-* **showImageText** - Show or hide text associated to photo in image preview (lightbox). Default value is _false_
-* **skipEmptyAlbums** - Skip albums for which plugin was unable to fetch at least one photo. Default value is _true_
-* **skipAlbums** - List of IDs or names or combined IDs and names of albums which will not be browsed (e.g ["Profile Pictures", "Timeline Photos"]). Default value is _[]_
-* **thumbnailSize** - Size of the thumnails for the album and photos (in pixels). Default value is _130_
-* **lightbox** - Show full size image in a lightbox style when clicked. Default value is _true_
-* **photosCheckbox** - Allows using of plugin as an image multipicker. Default value is _true_
-* **likeButton** - Adds Facebook like button for image on image lightbox preview. Default value if _true_
-* **shareButton** - Adds Facebook share button is like button is enabled. Adds AddThis buttons if addThis is set with AddThis pub-id. Default value is _true_
-* **albumsPageSize** - Page size of album browsing. If set to 0, paging is off. Default value if _0_
-* **albumsMoreButtonText** - Text value for more button when album paging is on. Default value if _"more albums..."_
-* **photosPageSize** - Page size of album photo browsing. If set to 0, paging is off. Default value if _0_
-* **photosMoreButtonText** - Text value for more button when photos paging is on. Default value if _"more photos..."_
-* **onlyAlbum** - Skips album browsing and starts browsing album with specific id. Default value is _"null"_
-* **showComments** - Shows comments of the photo when previewing photo. Default value is _"false"_
-* **commentsLimit** - Number of comments per page. Default value is _"5"_
-* **addThis** - Enables sharing via AddThis buttons if AddThis pub-id is provided and _shareButton_ is enabled. Default value is _null_
+
+
+| Name  		 			| Default value 	| Description				 	|
+| ------------------------- | ----------------- | ------------------------------|
+| **account**		 		|					| Facebook account for which albums and photos will be fetched and displayed. This parameter is mandatory and must be provided in order for plugin to work |
+| **accessToken**	 		|					| Access token for accessing non public content for the Facebook account |
+| **showAccountInfo**		| true				| Show Facebook account name and icon abowe the browser |
+| **showImageCount**		| true				| Show number of protos in each album. Default value is |
+| **showImageText**			| true				| Show or hide text associated to photo in image preview (lightbox) |
+| **skipEmptyAlbums**		| true				| Skip albums for which plugin was unable to fetch at least one photo |
+| **skipAlbums**			| []				| List of IDs or names or combined IDs and names of albums which will not be browsed (e.g ["Profile Pictures", "Timeline Photos"]) |
+| **thumbnailSize**			| 130				| Size of the thumnails for the album and photos (in pixels) |
+| **lightbox**				| true				| Show full size image in a lightbox style when clicked |
+| **photosCheckbox**		| true				| Allows using of plugin as an image multipicker |
+| **likeButton**			| true				| Adds Facebook like button for image on image lightbox preview |
+| **shareButton**			| true				| Adds Facebook share button is like button is enabled. Adds AddThis buttons if addThis is set with AddThis pub-id |
+| **albumsPageSize**		| 0					| Page size of album browsing. If set to 0, paging is off |
+| **albumsMoreButtonText**	| "more albums..."	| Text value for more button when album paging is on |
+| **photosPageSize**		| 0					| Page size of album photo browsing. If set to 0, paging is off |
+| **photosMoreButtonText**	| "more photos..."	| Text value for more button when photos paging is on |
+| **onlyAlbum**				| null				| Skips album browsing and starts browsing album with specific id |
+| **showComments**			| false				| Shows comments of the photo when previewing photo |
+| **commentsLimit**			| 5					| Number of comments per page |
+| **addThis**				| null				| Enables sharing via AddThis buttons if AddThis pub-id is provided and _shareButton_ is enabled |
 
 ###Events
 The following are events raised by plugin:
