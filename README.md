@@ -37,7 +37,7 @@ The following are options for the plugin which are used to congigure the plugin 
 | ------------------------- | ----------------- | ------------------------------|
 | **account**		 		|					| Facebook account for which albums and photos will be fetched and displayed. This parameter is mandatory and must be provided in order for plugin to work |
 | **accessToken**	 		|					| Access token for accessing non public content for the Facebook account |
-| **showAccountInfo**		| true				| Show Facebook account name and icon abowe the browser |
+| **showAccountInfo**		| true				| Show Facebook account name and icon above the browser |
 | **showImageCount**		| true				| Show number of protos in each album. Default value is |
 | **showImageText**			| true				| Show or hide text associated to photo in image preview (lightbox) |
 | **skipEmptyAlbums**		| true				| Skip albums for which plugin was unable to fetch at least one photo |

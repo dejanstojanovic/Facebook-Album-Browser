@@ -42,6 +42,7 @@ ul.fb-albums, ul.fb-photos {
 }
 
 li.fb-album, li.fb-photo {
+    position: relative;
     display: inline-block;
     width: 130px;
     height: 130px;
@@ -99,12 +100,15 @@ div.fb-album-count {
     background-color: rgba(59,89,152,0.8);
     color: #ffffff;
     position: absolute;
+    top: 0;
     text-align: center;
     padding: 5px;
     margin: 6px;
     display: block;
     min-width: 34px;
     border-radius: 5px;
+    -webkit-transition: top .3s linear;
+    transition: top .3s linear;
 }
 
 .fb-album-preview {
