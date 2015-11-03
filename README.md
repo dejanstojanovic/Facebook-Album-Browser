@@ -1,4 +1,3 @@
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dejanstojanovic/facebook-album-browser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 Facebook-Album-Browser
 ======================
 
