@@ -1,4 +1,4 @@
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=d.stojanovic@hotmail.com&url=https://github.com/dejanstojanovic/Facebook-Album-Browser&title=Facebook Album Browser&language=&tags=github&category=software) 
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=stojanovicdeja&url=https://github.com/dejanstojanovic/Facebook-Album-Browser&title=Facebook Album Browser&language=&tags=github&category=software) 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dejanstojanovic/facebook-album-browser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Facebook-Album-Browser
