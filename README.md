@@ -1,3 +1,6 @@
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=d.stojanovic@hotmail.com&url=https://github.com/dejanstojanovic/Facebook-Album-Browser&title=Facebook Album Browser&language=&tags=github&category=software) 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dejanstojanovic/facebook-album-browser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 Facebook-Album-Browser
 ======================
 
@@ -199,7 +202,3 @@ It would mean a lot to me to know where it is used, to see how it works and mayb
 I created an [issue](https://github.com/dejanstojanovic/Facebook-Album-Browser/issues/13) where you can add all your website URL/URLs where you are using this webiste.
 
 Thank you all in advance.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dejanstojanovic/facebook-album-browser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
