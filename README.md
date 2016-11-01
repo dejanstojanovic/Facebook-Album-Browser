@@ -1,5 +1,4 @@
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=stojanovicdeja&url=https://github.com/dejanstojanovic/Facebook-Album-Browser&title=Facebook Album Browser&language=&tags=github&category=software) 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dejanstojanovic/facebook-album-browser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Facebook-Album-Browser
 ======================
@@ -188,7 +187,7 @@ Follow the steps to get the access token to use the plugin
 5. After loading the url above you will get the access token in a response. Sopy the access_token value to plugin settings javascript code you use to initialize the plugin.
 5. Enjoy using the plugin :)
 
-###Notes
+> **Note:**
 In order to make this plugin work with Facebook account photos you need to allow **user_photos** permission in your Facebook App that is used to authenticate and add permissions.
 Please read the article on Facebook https://developers.facebook.com/docs/apps/review.
 
