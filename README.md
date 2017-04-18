@@ -8,10 +8,10 @@ Plugin is suitable for both desktop and mobile websites.
 
 ![ScreenShot](http://dejanstojanovic.net/media/31682/fb-albums.gif)
 
-###What can I do with it
+### What can I do with it
 The main purpose of this plugin is to enable to embed and customize phot albums in your website without being limited with Facebook styling. It also allows you to use it as picker as it raises events for clicked album/photo.
 
-###How to add to a page
+### How to add to a page
 Add a reference to jQuery library, this plugin library and this plugin CSS stylesheet
 ```html
 <link rel="stylesheet" type="text/css" href="../src/jquery.fb.albumbrowser.css" />
@@ -31,7 +31,7 @@ Simply add a container (div or any other element) and apply the plugin to it.
 </script>
 ```
 
-###What are options for plugin
+### What are options for plugin
 The following are options for the plugin which are used to congigure the plugin instance:
 
 
@@ -58,7 +58,7 @@ The following are options for the plugin which are used to congigure the plugin 
 | **commentsLimit**			| 5					| Number of comments per page |
 | **addThis**				| null				| Enables sharing via AddThis buttons if AddThis pub-id is provided and _shareButton_ is enabled |
 
-###Events
+### Events
 The following are events raised by plugin:
 
 | Name  		 			| Description				 	|
@@ -74,7 +74,7 @@ Every event functin returns an object which holds three properties:
 * **url** - large image url
 * **thumb** - thumbnail image url
 
-###Demo
+### Demo
 Test document test.html is contained in the soolution. You can download it for testing or use the following code:
 
 ```html
@@ -116,7 +116,7 @@ To see the plugin live in action [checkout demo on CodePen](http://codepen.io/de
 
 ![ScreenShot](http://dejanstojanovic.net/media/31684/preview-with-share.png)
 
-###AddThis support
+### AddThis support
 Starting from version 1.3.1 plugin supports sharing via AddThis sharing. It allows you to share facebook URL to an image direcly from the image lightbox preview in a plugin.
 All that needs to be done is to enable sharing button and provide AddThis pub-id to plugin in initialization settings and you are set to share Facebook photo URL direcly on your website.
 
@@ -136,7 +136,7 @@ All that needs to be done is to enable sharing button and provide AddThis pub-id
 </script>
 ```
 
-###Using it as a photo-picker
+### Using it as a photo-picker
 This plugin has buit in support for multiple picker, wich allows you to browse through albums and photos and pick them. The plugin will store all picked photos in an object array and make them available.
 
 You can either access picked images on your custom page event or you can hook to plugin's photoChecked and photoUnchecked event.
@@ -176,7 +176,7 @@ You can either access picked images on your custom page event or you can hook to
 
 ![ScreenShot](http://dejanstojanovic.net/media/31681/fb-album.png)
 
-###Acquiring the right access token
+### Acquiring the right access token
 Follow the steps to get the access token to use the plugin
 
 1. Login to developers.facebook.com with your Facebook developer account
@@ -193,7 +193,7 @@ Please read the article on Facebook https://developers.facebook.com/docs/apps/re
 
 For testing purposes you can use Facebook App test users. More about using test users you can find at https://developers.facebook.com/docs/apps/test-users/.
 
-###A word of author
+### A word of author
 So far I developed and mainatined this plugin by myself, so sometime I might not have time to respond to your requests and reported bugs. Feel free to participate. Every line of code, every comment or idea would mean a lot to maintain this free plugin project alive and up to date.
 
 It would mean a lot to me to know where it is used, to see how it works and maybe give me an idea what can be improved in order to better fit in to various websites.
